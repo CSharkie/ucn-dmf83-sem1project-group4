@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Location {
 
 	private String address;
-	private ArrayList stock;
+	private ArrayList<Product> stock;
 	
 	
 }
