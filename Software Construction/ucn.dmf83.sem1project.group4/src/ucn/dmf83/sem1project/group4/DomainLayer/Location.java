@@ -6,6 +6,6 @@ public class Location {
 
 	private String address;
 	private ArrayList<Product> stock;
-	
+	private ArrayList<Device> devices;
 	
 }

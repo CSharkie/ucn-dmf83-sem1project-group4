@@ -1,0 +1,160 @@
+<class-diagram version="1.0.11" icons="true" automaticImage="PNG" always-add-relationships="true" generalizations="true" 
+  realizations="true" associations="true" dependencies="true" nesting-relationships="true">  
+  <class id="1" corner="BOTTOM_RIGHT" language="java" name="ucn.dmf83.sem1project.group4.DomainLayer.Location" 
+    project="ucn.dmf83.sem1project.group4" 
+    file="/ucn.dmf83.sem1project.group4/src/ucn/dmf83/sem1project/group4/DomainLayer/Location.java" binary="false">    
+    <position height="-1" width="-1" x="209" y="211"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="2" corner="BOTTOM_RIGHT" language="java" name="ucn.dmf83.sem1project.group4.DomainLayer.Product" 
+    project="ucn.dmf83.sem1project.group4" 
+    file="/ucn.dmf83.sem1project.group4/src/ucn/dmf83/sem1project/group4/DomainLayer/Product.java" binary="false">    
+    <position height="-1" width="-1" x="210" y="8"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="3" corner="BOTTOM_RIGHT" language="java" name="ucn.dmf83.sem1project.group4.DomainLayer.Device" 
+    project="ucn.dmf83.sem1project.group4" 
+    file="/ucn.dmf83.sem1project.group4/src/ucn/dmf83/sem1project/group4/DomainLayer/Device.java" binary="false">    
+    <position height="-1" width="-1" x="208" y="394"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="4" corner="BOTTOM_RIGHT" language="java" name="ucn.dmf83.sem1project.group4.DomainLayer.Order" 
+    project="ucn.dmf83.sem1project.group4" 
+    file="/ucn.dmf83.sem1project.group4/src/ucn/dmf83/sem1project/group4/DomainLayer/Order.java" binary="false">    
+    <position height="-1" width="-1" x="559" y="7"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="5" corner="BOTTOM_RIGHT" language="java" name="ucn.dmf83.sem1project.group4.DomainLayer.Rent" 
+    project="ucn.dmf83.sem1project.group4" 
+    file="/ucn.dmf83.sem1project.group4/src/ucn/dmf83/sem1project/group4/DomainLayer/Rent.java" binary="false">    
+    <position height="-1" width="-1" x="561" y="395"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="6" corner="BOTTOM_RIGHT" language="java" name="ucn.dmf83.sem1project.group4.DomainLayer.Employee" 
+    project="ucn.dmf83.sem1project.group4" 
+    file="/ucn.dmf83.sem1project.group4/src/ucn/dmf83/sem1project/group4/DomainLayer/Employee.java" binary="false">    
+    <position height="-1" width="-1" x="559" y="210"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="7" corner="BOTTOM_RIGHT" language="java" name="ucn.dmf83.sem1project.group4.DomainLayer.Item" 
+    project="ucn.dmf83.sem1project.group4" 
+    file="/ucn.dmf83.sem1project.group4/src/ucn/dmf83/sem1project/group4/DomainLayer/Item.java" binary="false">    
+    <position height="-1" width="-1" x="-58" y="217"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <association id="8">    
+    <bendpoint x="838" y="395"/>    
+    <bendpoint x="838" y="211"/>    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="9" name="renter">        
+        <position height="15" width="36" x="782" y="379"/>      
+      </attribute>      
+      <multiplicity id="10" minimum="0" maximum="1">        
+        <position height="15" width="21" x="793" y="398"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="11">    
+    <bendpoint x="-58" y="8"/>    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="7"/>  
+  </generalization>  
+  <association id="12">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="13" name="devices">        
+        <position height="15" width="45" x="160" y="291"/>      
+      </attribute>      
+      <multiplicity id="14" minimum="0" maximum="2147483647">        
+        <position height="15" width="19" x="215" y="293"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="15">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="16" name="seller">        
+        <position height="15" width="33" x="566" y="117"/>      
+      </attribute>      
+      <multiplicity id="17" minimum="0" maximum="1">        
+        <position height="15" width="21" x="529" y="117"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="18">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="19" name="location">        
+        <position height="15" width="44" x="368" y="193"/>      
+      </attribute>      
+      <multiplicity id="20" minimum="0" maximum="1">        
+        <position height="15" width="21" x="381" y="213"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="21">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="22" name="device">        
+        <position height="15" width="39" x="372" y="379"/>      
+      </attribute>      
+      <multiplicity id="23" minimum="0" maximum="1">        
+        <position height="15" width="21" x="383" y="399"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="24">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="2"/>  
+  </dependency>  
+  <generalization id="25">    
+    <bendpoint x="-57" y="394"/>    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="7"/>  
+  </generalization>  
+  <association id="26">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="27" name="stock">        
+        <position height="15" width="33" x="174" y="107"/>      
+      </attribute>      
+      <multiplicity id="28" minimum="0" maximum="2147483647">        
+        <position height="15" width="19" x="216" y="107"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+    visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true"/>    
+    <operations public="true" package="true" protected="true" private="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

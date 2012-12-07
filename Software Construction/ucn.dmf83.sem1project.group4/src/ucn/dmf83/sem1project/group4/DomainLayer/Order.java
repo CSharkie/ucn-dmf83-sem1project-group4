@@ -12,9 +12,9 @@ public class Order {
 	
 	private Map<Product,Integer> orderItems;
 	
-	private int orderPrice;
+	private double orderPrice;
 	private int discount;
-	private int finalprice;
+	private double finalprice;
 	
 	private boolean isPaid;
 }

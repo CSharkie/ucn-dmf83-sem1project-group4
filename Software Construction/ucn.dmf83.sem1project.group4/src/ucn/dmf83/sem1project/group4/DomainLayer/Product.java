@@ -4,10 +4,7 @@ import java.util.Map;
 import java.util.Date;
 
 
-public class Product {
-	private String ID;
-	private String name;
-	private String description;
+public class Product extends Item{
 	
 	private Map<Date,Integer> prices;
 	
