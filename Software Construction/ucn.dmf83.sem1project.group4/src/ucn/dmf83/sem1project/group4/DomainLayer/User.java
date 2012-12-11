@@ -11,13 +11,15 @@ import java.util.Date;
  *
  */
 public class User {
-	
 	private int ID;
+	
 	private String name;
 	private Date DoB;
+	
 	private String address;
 	private int postalCode;
 	private String city;
+	
 	private String phoneNum;
 	private String email;
 	

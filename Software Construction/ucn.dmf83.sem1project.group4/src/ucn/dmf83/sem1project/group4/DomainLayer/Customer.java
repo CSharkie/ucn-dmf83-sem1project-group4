@@ -7,8 +7,6 @@ public class Customer extends User {
 	private int discount;
 	private customerGroup group;
 	
-	
-	
 	/**
 	 * 
 	 */

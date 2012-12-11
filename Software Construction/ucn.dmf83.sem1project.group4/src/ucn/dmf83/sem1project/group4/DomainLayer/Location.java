@@ -1,12 +1,14 @@
 package ucn.dmf83.sem1project.group4.DomainLayer;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Location {
 	int ID;
 	
 	private String name;
 	private String address;
+	
 	private ArrayList<Product> stock;
 	private ArrayList<Device> devices;
 	
@@ -63,5 +65,33 @@ public class Location {
 		this.address = address;
 	}
 	
+	public boolean hasProduct(Product product)
+	{
+		if(stock.contains(product))
+			return true;
+		else
+			return false;
+	}
+	
+	public Product getProduct(int ID)
+	{
+		for(Iterator<Product> i = stock.iterator(); i.hasNext();) {
+			Product p = i.next();
+			if(p.getID() == ID)
+				return p;
+		}
+		
+		return null;
+	}
+	
+	public void addProduct(Product p)
+	{
+		stock.add(p);
+	}
+	
+	public void addDevice(Device d)
+	{
+		devices.add(d);
+	}
 	
 }

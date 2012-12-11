@@ -21,6 +21,7 @@ public class Product extends Item{
 	public Product(int ID, String name, String description) {
 		super(ID, name, description);
 	}
+	
 	/**
 	 * @param iD
 	 * @param name
@@ -73,6 +74,11 @@ public class Product extends Item{
 	
 	public int getPrice(Date date)
 	{
-		return prices.get(prices.headMap(date, true).lastKey());
+		return prices.floorEntry(date).getValue();
+	}
+	
+	public void removePrice(Date date)
+	{
+		prices.remove(date);
 	}
 }
