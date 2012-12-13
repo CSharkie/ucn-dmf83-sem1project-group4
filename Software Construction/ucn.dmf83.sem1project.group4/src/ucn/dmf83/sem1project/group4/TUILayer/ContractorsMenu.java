@@ -7,19 +7,19 @@ import ucn.dmf83.sem1project.group4.ControlLayer.*;
 /**
  * @author Group 4 DM83F
  */
-public class CustomersMenu {
-	
+public class ContractorsMenu {
+
 	private static void start()
 	{
-		CustomerMenu();
+		ContractorMenu();
 	}
 	
-	private static void CustomerMenu()
+	private static void ContractorMenu()
 	{
 		boolean exit =false;
 		while (!exit)
 		{
-			int choise = writeCustomerMenu();
+			int choise = writeContractorMenu();
 			switch(choise) {
 				case 1: {
 					String i="";
@@ -50,7 +50,7 @@ public class CustomersMenu {
 		}
 	}
 	
-	private static int writeCustomerMenu()
+	private static int writeContractorMenu()
 	{
 		Scanner keyboard = new Scanner(System.in);
 		// TODO Write the menu options
