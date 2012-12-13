@@ -1,21 +1,20 @@
-package ucn.dmf83.sem1project.group4.ControlLayer;
+package ucn.dmf83.sem1project.group4.DomainLayer;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import ucn.dmf83.sem1project.group4.DomainLayer.*;
-
-public class LocationControl {
-	private ArrayList<Location> locations;
+public class LocationContainer {
 	
-	private static LocationControl instance = null;
+private ArrayList<Location> locations;
+	
+	private static LocationContainer instance = null;
 
-	protected LocationControl() {
+	protected LocationContainer() {
 	}
 
-	public static LocationControl getInstance() {
+	public static LocationContainer getInstance() {
 		if (null == instance) {
-			instance = new LocationControl();
+			instance = new LocationContainer();
 		}
 		return instance;
 	}
@@ -65,4 +64,5 @@ public class LocationControl {
 		
 		return null;
 	}
+
 }

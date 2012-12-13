@@ -1,22 +1,21 @@
-package ucn.dmf83.sem1project.group4.ControlLayer;
+package ucn.dmf83.sem1project.group4.DomainLayer;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import ucn.dmf83.sem1project.group4.DomainLayer.*;
-
-public class ContractorControl {
-	private ArrayList<Contractor> contractors;
+public class ContractorContainer {
 	
-	private static ContractorControl instance = null;
+private ArrayList<Contractor> contractors;
+	
+	private static ContractorContainer instance = null;
 
-	protected ContractorControl() {
+	protected ContractorContainer() {
 		
 	}
 
-	public static ContractorControl getInstance() {
+	public static ContractorContainer getInstance() {
 		if (instance == null) {
-			instance = new ContractorControl();
+			instance = new ContractorContainer();
 		}
 		return instance;
 	}
@@ -42,4 +41,5 @@ public class ContractorControl {
 		
 		return null;
 	}
+
 }

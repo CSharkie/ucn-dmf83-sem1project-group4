@@ -1,21 +1,20 @@
-package ucn.dmf83.sem1project.group4.ControlLayer;
+package ucn.dmf83.sem1project.group4.DomainLayer;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import ucn.dmf83.sem1project.group4.DomainLayer.*;
-
-public class RentControl {
-	private ArrayList<Rent> rents;
+public class RentContainer {
 	
-	private static RentControl instance = null;
+private ArrayList<Rent> rents;
+	
+	private static RentContainer instance = null;
 
-	protected RentControl() {
+	protected RentContainer() {
 	}
 
-	public static RentControl getInstance() {
+	public static RentContainer getInstance() {
 		if (instance == null) {
-			instance = new RentControl();
+			instance = new RentContainer();
 		}
 		return instance;
 	}
@@ -41,4 +40,5 @@ public class RentControl {
 		
 		return null;
 	}
+	
 }

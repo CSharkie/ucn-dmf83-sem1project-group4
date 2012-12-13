@@ -1,22 +1,21 @@
-package ucn.dmf83.sem1project.group4.ControlLayer;
+package ucn.dmf83.sem1project.group4.DomainLayer;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import ucn.dmf83.sem1project.group4.DomainLayer.*;
-
-public class OrderControl {
-	private ArrayList<Order> orders;
+public class OrderContainer {
 	
-	private static OrderControl instance = null;
+private ArrayList<Order> orders;
+	
+	private static OrderContainer instance = null;
 
-	protected OrderControl() {
+	protected OrderContainer() {
 		orders = new ArrayList<Order>();
 	}
 
-	public static OrderControl getInstance() {
+	public static OrderContainer getInstance() {
 		if (instance == null) {
-			instance = new OrderControl();
+			instance = new OrderContainer();
 		}
 		return instance;
 	}
@@ -42,4 +41,5 @@ public class OrderControl {
 		
 		return null;
 	}
+
 }
