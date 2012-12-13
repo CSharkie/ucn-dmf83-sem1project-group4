@@ -33,7 +33,7 @@ public class ContractorsMenu {
 						String var = keyboard.nextLine();
 							i=var;
 					}
-					new OrdersMenu();
+					new ContractorsMenu();
 					break;
 				} 
 				// TODO Write the rest of the menu options
