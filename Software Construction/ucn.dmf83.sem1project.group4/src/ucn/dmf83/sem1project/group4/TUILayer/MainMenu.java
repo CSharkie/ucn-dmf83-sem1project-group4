@@ -17,10 +17,10 @@ public class MainMenu {
 	/**
      * Method to start the main UI
      */
-    public MainMenu()
-    {
-        mainMenuStart();
-    }
+	public static void main(String[] args) 
+	{
+		mainMenuStart();
+	}
     
     public static void mainMenuStart()
     {
@@ -61,7 +61,7 @@ public class MainMenu {
     		}
     		default:
     		{
-    			System.out.println(" Invalid selection, please try again! ");
+    			System.out.println("\n Invalid selection, please try again! ");
     			break;
     		}
     		}
@@ -74,7 +74,7 @@ public class MainMenu {
     private static int writeMainMenu()
     {       
     	Scanner keyboard = new Scanner(System.in);
-    	System.out.println("\f *** MainMenu ***");
+    	System.out.println("\n *** MainMenu ***");
     	System.out.println(" (1) Orders Menu");
     	System.out.println(" (2) Producs Menu");
     	System.out.println(" (3) Contractors Menu");
@@ -122,7 +122,7 @@ public class MainMenu {
      */
     private static void writeEnd()
     {
-        System.out.println(" The System is shutting down. ");
+        System.out.println("\n The System is shutting down. ");
     }
 
 }

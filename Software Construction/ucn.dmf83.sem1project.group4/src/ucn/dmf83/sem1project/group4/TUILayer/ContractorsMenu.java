@@ -43,7 +43,7 @@ public class ContractorsMenu {
 					break;
 				}
 				default: {
-					System.out.println(" Invalid selection, please try again! ");
+					System.out.println("\n Invalid selection, please try again! ");
 					break;
 				}
 			}
