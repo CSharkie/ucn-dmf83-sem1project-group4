@@ -34,9 +34,8 @@ private ArrayList<customerGroup> customerGroups;
 	
 	public Customer getCustomer(int ID)
 	{
-		for(Iterator<Customer> i = customers.iterator(); i.hasNext();)
+		for(Customer c : customers)
 		{
-			Customer c = i.next();
 			if(c.getID() == ID)
 			{
 				return c;
@@ -58,11 +57,10 @@ private ArrayList<customerGroup> customerGroups;
 	
 	public customerGroup getCustomerGroup(int ID)
 	{
-		for(Iterator<customerGroup> i = customerGroups.iterator(); i.hasNext();)
+		for(customerGroup cg : customerGroups)
 		{
-			customerGroup ct = i.next();
-			if(ct.getID() == ID)
-				return ct;
+			if(cg.getID() == ID)
+				return cg;
 		}
 		
 		return null;

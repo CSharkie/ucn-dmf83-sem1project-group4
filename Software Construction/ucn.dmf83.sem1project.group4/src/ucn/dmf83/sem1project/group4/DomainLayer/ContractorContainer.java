@@ -32,9 +32,8 @@ private ArrayList<Contractor> contractors;
 	
 	public Contractor getContractor(int ID)
 	{
-		for(Iterator<Contractor> i = contractors.iterator(); i.hasNext();)
+		for(Contractor ct : contractors)
 		{
-			Contractor ct = i.next();
 			if(ct.getID() == ID)
 				return ct;
 		}

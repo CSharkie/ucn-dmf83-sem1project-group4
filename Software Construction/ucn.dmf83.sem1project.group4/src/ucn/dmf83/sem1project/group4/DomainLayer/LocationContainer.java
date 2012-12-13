@@ -55,9 +55,8 @@ private ArrayList<Location> locations;
 	
 	public Location getLocation(Product p)
 	{
-		for(Iterator<Location> i = locations.iterator(); i.hasNext();)
+		for(Location loc : locations)
 		{
-			Location loc = i.next();
 			if(loc.hasProduct(p))
 				return loc;
 		}

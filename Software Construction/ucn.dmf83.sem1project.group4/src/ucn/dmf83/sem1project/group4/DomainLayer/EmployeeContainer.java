@@ -65,11 +65,10 @@ private ArrayList<employeeRole> employeeRoles;
 	
 	public employeeRole getEmployeeRole(int ID)
 	{
-		for(Iterator<employeeRole> i = employeeRoles.iterator(); i.hasNext();)
+		for(employeeRole emp : employeeRoles)
 		{
-			employeeRole ct = i.next();
-			if(ct.getID() == ID)
-				return ct;
+			if(emp.getID() == ID)
+				return emp;
 		}
 		
 		return null;

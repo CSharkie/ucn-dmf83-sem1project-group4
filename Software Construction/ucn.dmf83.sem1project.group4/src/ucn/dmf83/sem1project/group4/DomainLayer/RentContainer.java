@@ -31,11 +31,10 @@ private ArrayList<Rent> rents;
 	
 	public Rent getRent(int ID)
 	{
-		for(Iterator<Rent> i = rents.iterator(); i.hasNext();)
+		for(Rent r : rents)
 		{
-			Rent ct = i.next();
-			if(ct.getID() == ID)
-				return ct;
+			if(r.getID() == ID)
+				return r;
 		}
 		
 		return null;

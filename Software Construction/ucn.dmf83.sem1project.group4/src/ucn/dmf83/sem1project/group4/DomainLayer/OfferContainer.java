@@ -31,11 +31,10 @@ private ArrayList<Offer> offers;
 	
 	public Offer getOffer(int ID)
 	{
-		for(Iterator<Offer> i = offers.iterator(); i.hasNext();)
+		for(Offer offer : offers)
 		{
-			Offer ct = i.next();
-			if(ct.getID() == ID)
-				return ct;
+			if(offer.getID() == ID)
+				return offer;
 		}
 		
 		return null;

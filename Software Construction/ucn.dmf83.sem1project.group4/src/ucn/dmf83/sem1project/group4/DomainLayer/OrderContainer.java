@@ -32,11 +32,10 @@ private ArrayList<Order> orders;
 	
 	public Order getOrder(int ID)
 	{
-		for(Iterator<Order> i = orders.iterator(); i.hasNext();)
+		for(Order order : orders)
 		{
-			Order ct = i.next();
-			if(ct.getID() == ID)
-				return ct;
+			if(order.getID() == ID)
+				return order;
 		}
 		
 		return null;
