@@ -53,7 +53,7 @@ public class MainMenu {
     			exit = true;
     			break;
     		}
-    		case 5:
+    		case 0:
     		{
     			writeEnd();
     			exit = true;
@@ -75,11 +75,11 @@ public class MainMenu {
     {       
     	Scanner keyboard = new Scanner(System.in);
     	System.out.println("\n *** MainMenu ***");
-    	System.out.println(" (1) Orders Menu");
-    	System.out.println(" (2) Producs Menu");
-    	System.out.println(" (3) Contractors Menu");
-    	System.out.println(" (4) Customers Menu");
-    	System.out.println(" (5) Close");
+    	System.out.println(" [1] Orders Menu");
+    	System.out.println(" [2] Producs Menu");
+    	System.out.println(" [3] Contractors Menu");
+    	System.out.println(" [4] Customers Menu");
+    	System.out.println(" [0] Close");
     	System.out.print("\n Make your choise: ");
     	int choise = keyboard.nextInt();
     	return choise;

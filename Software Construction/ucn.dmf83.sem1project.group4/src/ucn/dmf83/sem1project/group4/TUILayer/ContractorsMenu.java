@@ -28,8 +28,8 @@ public class ContractorsMenu {
 						Scanner keyboard = new Scanner(System.in);
 						// TODO Write the method
 						System.out.println();
-						System.out.println(" (1) Return ");
-						System.out.println(" (Enter) ");
+						System.out.println(" [1] Return ");
+						System.out.println(" [Enter] ");
 						String var = keyboard.nextLine();
 							i=var;
 					}
@@ -37,7 +37,7 @@ public class ContractorsMenu {
 					break;
 				} 
 				// TODO Write the rest of the menu options
-				case 11: {
+				case 0: {
 					MainMenu.mainMenuStart();
 					exit = true;
 					break;
