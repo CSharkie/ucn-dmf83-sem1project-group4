@@ -2,24 +2,19 @@ package ucn.dmf83.sem1project.group4.TUILayer;
 
 import java.util.Scanner;
 
-import ucn.dmf83.sem1project.group4.ControlLayer.*;
-
-/**
- * @author Group 4 DM83F
- */
-public class ContractorsMenu {
+public class EmployeesMenu {
 
 	public static void start()
 	{
-		ContractorMenu();
+		EmployeeMenu();
 	}
 	
-	private static void ContractorMenu()
+	private static void EmployeeMenu()
 	{
 		boolean exit =false;
 		while (!exit)
 		{
-			int choise = writeContractorMenu();
+			int choise = writeEmployeeMenu();
 			switch(choise) {
 				case 1: {
 					String i="";
@@ -29,13 +24,13 @@ public class ContractorsMenu {
 						// TODO Write the method
 						System.out.println();
 						System.out.println(" [1] Return ");
-						System.out.println(" [Enter] Add another Contractor");
+						System.out.println(" [Enter] Add another Employee");
 						String var = keyboard.nextLine();
 							i=var;
 					}
-					new ContractorsMenu();
+					new EmployeesMenu();
 					break;
-				} 
+				}
 				case 2: {
 					String i="";
 					while (!i.equals("1"))
@@ -44,11 +39,11 @@ public class ContractorsMenu {
 						// TODO Write the method
 						System.out.println();
 						System.out.println(" [1] Return ");
-						System.out.println(" [Enter] Update another Contractor");
+						System.out.println(" [Enter] Update another Employee");
 						String var = keyboard.nextLine();
 							i=var;
 					}
-					new ContractorsMenu();
+					new EmployeesMenu();
 					break;
 				}
 				case 3: {
@@ -59,11 +54,11 @@ public class ContractorsMenu {
 						// TODO Write the method
 						System.out.println();
 						System.out.println(" [1] Return ");
-						System.out.println(" [Enter] Remove another Contractor");
+						System.out.println(" [Enter] Remove another Employee");
 						String var = keyboard.nextLine();
 							i=var;
 					}
-					new ContractorsMenu();
+					new EmployeesMenu();
 					break;
 				}
 				case 4: {
@@ -74,11 +69,11 @@ public class ContractorsMenu {
 						// TODO Write the method
 						System.out.println();
 						System.out.println(" [1] Return ");
-						System.out.println(" [Enter] List all Contractors");
+						System.out.println(" [Enter] List again all the Emplyees");
 						String var = keyboard.nextLine();
 							i=var;
 					}
-					new ContractorsMenu();
+					new EmployeesMenu();
 					break;
 				}
 				case 5: {
@@ -89,11 +84,11 @@ public class ContractorsMenu {
 						// TODO Write the method
 						System.out.println();
 						System.out.println(" [1] Return ");
-						System.out.println(" [Enter] Search for another Contractor");
+						System.out.println(" [Enter] Search for another Emplyee");
 						String var = keyboard.nextLine();
 							i=var;
 					}
-					new ContractorsMenu();
+					new EmployeesMenu();
 					break;
 				}
 				case 0: {
@@ -109,15 +104,15 @@ public class ContractorsMenu {
 		}
 	}
 	
-	private static int writeContractorMenu()
+	private static int writeEmployeeMenu()
 	{
 		Scanner keyboard = new Scanner(System.in);
-		System.out.println("\n\n *** Contractors Menu *** ");
-		System.out.println(" [1] Add Contractor");
-		System.out.println(" [2] Update Contractor");
-		System.out.println(" [3] Remove Contractor");
-		System.out.println(" [4] List all CContractors");
-		System.out.println(" [5] Search for Contractor");
+		System.out.println("\n\n *** Employees Menu *** ");
+		System.out.println(" [1] Add Employee");
+		System.out.println(" [2] Update Emplyee");
+		System.out.println(" [3] Remove Emplyee");
+		System.out.println(" [4] List all Emplyees");
+		System.out.println(" [5] Search for Emplyee");
 		System.out.println(" [0] Back to Main Menu");
 		System.out.println("\n\n Make your choise: ");
 		int choise = keyboard.nextInt();
@@ -125,5 +120,5 @@ public class ContractorsMenu {
 	}
 	
 	// TODO Import the methods from the ControlLayer
-
+	
 }

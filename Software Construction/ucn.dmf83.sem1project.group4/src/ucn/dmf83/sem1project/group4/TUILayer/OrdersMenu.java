@@ -9,7 +9,7 @@ import ucn.dmf83.sem1project.group4.ControlLayer.*;
  */
 public class OrdersMenu {
 
-	private static void start()
+	public static void start()
 	{
 		OrderMenu();
 	}
@@ -53,7 +53,10 @@ public class OrdersMenu {
 	private static int writeOrderMenu()
 	{
 		Scanner keyboard = new Scanner(System.in);
-		// TODO Write the menu options
+		System.out.println("\n\n *** Order Menu *** ");
+		System.out.println(" [1] ");
+		System.out.println(" [0] Back to Main Menu");
+		System.out.println("\n\n Make your choise: ");
 		int choise = keyboard.nextInt();
 		return choise;
 	}

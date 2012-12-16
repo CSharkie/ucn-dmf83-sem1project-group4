@@ -10,9 +10,10 @@ import ucn.dmf83.sem1project.group4.ControlLayer.*;
 public class MainMenu {
 	
 	private static OrdersMenu orders;
-	private static ProductsMenu products;
+	private static DepartmentsMenu department;
 	private static ContractorsMenu contractor;
 	private static CustomersMenu customer;
+	private static EmployeesMenu emplyee;
 	
 	/**
      * Method to start the main UI
@@ -37,7 +38,7 @@ public class MainMenu {
     		}
     		case 2:
     		{
-    			startProductMenu();
+    			startEmplyeeMenu();
     			exit = true;
     			break;
     		}
@@ -76,9 +77,10 @@ public class MainMenu {
     	Scanner keyboard = new Scanner(System.in);
     	System.out.println("\n *** MainMenu ***");
     	System.out.println(" [1] Orders Menu");
-    	System.out.println(" [2] Producs Menu");
+    	System.out.println(" [2] Emplyees Menu");
     	System.out.println(" [3] Contractors Menu");
     	System.out.println(" [4] Customers Menu");
+    	System.out.println(" [5] Departments Menu");
     	System.out.println(" [0] Close");
     	System.out.print("\n Make your choise: ");
     	int choise = keyboard.nextInt();
@@ -90,15 +92,15 @@ public class MainMenu {
      */
     private static void startOrderMenu()
     {
-    	// TODO Finish the other menus
+    	orders.start();
     }
 
     /**
      * Method to start the Products Menu
      */
-    private static void startProductMenu()
+    private static void startEmplyeeMenu()
     {
-    	// TODO Finish the other menus
+    	emplyee.start();
     }
 
     /**
@@ -106,7 +108,7 @@ public class MainMenu {
      */
     private static void startContractorMenu()
     {
-    	// TODO Finish the other menus
+    	contractor.start();
     }
 
     /**
@@ -114,7 +116,15 @@ public class MainMenu {
      */
     private static void startCustomerMenu()
     {
-    	// TODO Finish the other menus
+    	customer.start();
+    }
+    
+    /**
+     * Method to start the Departments Menu
+     */
+    private static void startDepartmentMenu()
+    {
+    	department.start();
     }
     
     /**
