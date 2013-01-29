@@ -17,19 +17,21 @@ public class CustomerControl {
 		customer = CustomerContainer.getInstance();
 	}
 	
-	private void createCustomer(String name, int ID, customerGroup cgroup)
+	public void createCustomer(String name, int ID, customerGroup cgroup)
 	{
 		customer.addCustomer(name, ID, cgroup);
 	}
 	
-	private void removeCustomer(int ID)
+	public void removeCustomer(int ID)
 	{
 		customer.removeCustomer(ID);
 	}
 	
-	private void updateCustomer(Customer original, Customer newc)
+	public void updateCustomer(Customer original, Customer newc)
 	{
 		customer.updateCustomer(original, newc);
 	}
+	
+	
 	
 }

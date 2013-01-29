@@ -10,37 +10,30 @@ public class EmployeeControl {
 	/**
 	 * instance variables
 	 */
-	private EmployeeContainer employeeContainer;
+	private EmployeeContainer container;
 	private Employee employee;
 	
 	public EmployeeControl()
 	{
-		employeeContainer = EmployeeContainer.getInstance();
+		container = EmployeeContainer.getInstance();
 	}
 	
-	public void createEmployee(String name, int ID, Location location, employeeRole role, String userName)
+	public void createEmployee(String name, Location location )
 	{
-		employeeContainer.createEmployee(name, ID, location, role, userName);
+		container.createEmployee(name,location);
 	}
 	
 	public void removeEmployee(int ID)
 	{
-		employeeContainer.removeEmloyee(ID);
+		container.removeEmloyee(ID);
+	}
+	
+	public void getEmployee(int ID) {
+		this.employee = container.getEmployee(ID);
 	}
 	
 	public void updateEmployeeLocation(Location location)
 	{
 		employee.setLocation(location);
 	}
-	
-	public void updateEmployeeRole(employeeRole role)
-	{
-		employee.setRole(role);
-	}
-	
-	public void updateEmployeeUserName(String userName)
-	{
-		employee.setUserName(userName);
-	}
-
 }

@@ -7,15 +7,14 @@ import ucn.dmf83.sem1project.group4.DomainLayer.*;
 
 public class OrderControl {
 	
-	private OrderContainer orderContainer;
+	private OrderContainer container;
 	private Order order;
-	private Product product;
 	
 	private static OrderControl instance;
 	
 	public OrderControl()
 	{
-		orderContainer = OrderContainer.getInstance();
+		container = OrderContainer.getInstance();
 	}
 	
 	public static OrderControl getInstance() {
@@ -28,28 +27,28 @@ public class OrderControl {
 	public Order createOrder(int iD, Customer customer, Employee seller, Date orderDate, boolean isPaid)
     {
         order = new Order(iD, customer, seller, orderDate, isPaid);
-        orderContainer.addOrder(order);
+        container.addOrder(order);
         return order;
     }
 	
 	public Order getOrder(int ID)
     {
-        return orderContainer.getOrder(ID);
+        return container.getOrder(ID);
     }
 	
 	public ArrayList<Order> getOrders(Date startDate, Date endDate)
 	{
-		return orderContainer.getOrders(startDate, endDate);
+		return container.getOrders(startDate, endDate);
 	}
 	
 	public ArrayList<Order> getOrders(Employee emp)
 	{
-		return orderContainer.getOrders(emp);
+		return container.getOrders(emp);
 	}
 	
 	public ArrayList<Order> getOrders(Date startDate)
 	{
-		return orderContainer.getOrders(startDate, new Date());
+		return container.getOrders(startDate, new Date());
 	}
 	
 	public double makePayment(Order o, double amount)
@@ -59,7 +58,7 @@ public class OrderControl {
 	
 	public void removeOrder(Order order)
 	{
-		orderContainer.removeOrder(order);
+		container.removeOrder(order);
 	}
 
 }

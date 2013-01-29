@@ -6,7 +6,6 @@ import java.util.Iterator;
 public class EmployeeContainer {
 	
 private ArrayList<Employee> employees;
-private ArrayList<employeeRole> employeeRoles;
 	
 	private static EmployeeContainer instance = null;
 
@@ -53,35 +52,11 @@ private ArrayList<employeeRole> employeeRoles;
         return true;
     }
 	
-	public void addEmployeeRole(employeeRole emprole)
+	public void createEmployee(String name, Location location)
 	{
-		employeeRoles.add(emprole);
-	}
-	
-	public void removeEmployeeRole(employeeRole emprole)
-	{
-		employeeRoles.remove(emprole);
-	}
-	
-	public employeeRole getEmployeeRole(int ID)
-	{
-		for(employeeRole emp : employeeRoles)
-		{
-			if(emp.getID() == ID)
-				return emp;
-		}
-		
-		return null;
-	}
-	
-	public void createEmployee(String name, int ID, Location location, employeeRole role, String userName)
-	{
-		if(checkID(ID)==false) {
-			System.out.println("ID already exists.");
-		} else {
-			Employee employee = new Employee(name, ID, location, role, userName);
-			addEmployee(employee);
-		}
+		int ID = employees.size();
+		Employee employee = new Employee(name, ID, location);
+		addEmployee(employee);
 	}
 	
 	public void removeEmloyee(int ID)

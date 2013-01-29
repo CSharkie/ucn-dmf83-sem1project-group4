@@ -10,16 +10,10 @@ package ucn.dmf83.sem1project.group4.DomainLayer;
 public class Employee extends User {
 	
 	private Location location;
-	private employeeRole role;
-	
-	private String userName; // Used for the login screen
 
-	public Employee(String name, int ID, Location location, employeeRole role,
-			String userName) {
+	public Employee(String name, int ID, Location location) {
 		super(name, ID);
 		this.location = location;
-		this.role = role;
-		this.userName = userName;
 	}
 	
 	
@@ -28,9 +22,8 @@ public class Employee extends User {
 	}
 
 	
-	public Employee(String name, int ID, String userName) {
+	public Employee(String name, int ID) {
 		super(name, ID);
-		this.userName = userName;
 	}
 
 
@@ -40,35 +33,11 @@ public class Employee extends User {
 	public Location getLocation() {
 		return location;
 	}
-	/**
-	 * @return the role
-	 */
-	public employeeRole getRole() {
-		return role;
-	}
+
 	/**
 	 * @param location the location to set
 	 */
 	public void setLocation(Location location) {
 		this.location = location;
 	}
-	/**
-	 * @param role the role to set
-	 */
-	public void setRole(employeeRole role) {
-		this.role = role;
-	}
-
-
-	public String getUserName() {
-		return userName;
-	}
-
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-	
-	
-	
 }
