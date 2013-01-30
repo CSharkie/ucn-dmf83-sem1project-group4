@@ -30,7 +30,7 @@ public class SystemUserContainer implements Serializable {
 		
 		for(Iterator<SystemUser> it = systemUsers.iterator(); it.hasNext();) {
 			SystemUser tempuser = it.next();
-			if(getUserState(tempuser.getUserName())) {
+			if(getSystemUser(username) != null) {
 				System.out.println("UserDB - User " + tempuser.getUserName() + " exists.");
 				if(tempuser.getPassword().equals(password.toString())) {
 					System.out.println("UserDB - User " + tempuser.getUserName() + " authenticated.");
@@ -40,18 +40,6 @@ public class SystemUserContainer implements Serializable {
 		}
 		
 		return user;
-	}
-	
-	private boolean getUserState(String username) {
-		boolean exists = false;
-		
-		for(SystemUser user:systemUsers) {
-			if(user.getUserName() == username)
-				exists = true;
-		}
-		
-		
-		return exists;
 	}
 	
 	public SystemUser getSystemUser(String username) {
@@ -66,7 +54,7 @@ public class SystemUserContainer implements Serializable {
 	}
 	
 	public void addSystemUser(String username, String password) {
-		if(getUserState(username)) {
+		if(getSystemUser(username) == null) {
 			systemUsers.add(new SystemUser(username,password));
 			System.out.println("UserDB - Added user " +  username);
 		}

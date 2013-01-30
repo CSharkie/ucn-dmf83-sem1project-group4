@@ -98,10 +98,10 @@ public class GUITest {
 				Ucontrol.setUser(SUcontrol.authSystemUser(uname, password));
 				
 				if(Ucontrol.getUser() != null) {
-					//MainApp.main(null);
-					//shell.close();
-					//shell.dispose();
-					labelFinal.setText("Login successful!");
+					shell.setVisible(false);
+					shell.close();
+					MainApp.main(null);
+					shell.dispose();
 				}
 				else {
 					labelFinal.setText("Login failed!");
