@@ -2,10 +2,13 @@ package ucn.dmf83.sem1project.group4.DomainLayer;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.io.Serializable;
 
-public class OfferContainer {
+public class OfferContainer implements Serializable {
 	
-private ArrayList<Offer> offers;
+	private static final long serialVersionUID = -5934404983871750457L;
+
+	private ArrayList<Offer> offers;
 	
 	private static OfferContainer instance = null;
 

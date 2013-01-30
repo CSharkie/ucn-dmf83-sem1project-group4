@@ -2,10 +2,13 @@ package ucn.dmf83.sem1project.group4.DomainLayer;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.io.Serializable;
 
-public class EmployeeContainer {
+public class EmployeeContainer implements Serializable {
 	
-private ArrayList<Employee> employees;
+	private static final long serialVersionUID = 6691751667232337863L;
+
+	private ArrayList<Employee> employees;
 	
 	private static EmployeeContainer instance = null;
 

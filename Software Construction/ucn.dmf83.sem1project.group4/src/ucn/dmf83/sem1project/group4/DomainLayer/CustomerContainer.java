@@ -1,11 +1,14 @@
 package ucn.dmf83.sem1project.group4.DomainLayer;
 
 import java.util.ArrayList;
+import java.io.Serializable;
 
-public class CustomerContainer {
+public class CustomerContainer implements Serializable {
 
-private ArrayList<Customer> customers;
-private ArrayList<customerGroup> customerGroups;
+	private static final long serialVersionUID = -1399522310091090222L;
+	
+	private ArrayList<Customer> customers;
+	private ArrayList<customerGroup> customerGroups;
 	
 	private static CustomerContainer instance = null;
 	

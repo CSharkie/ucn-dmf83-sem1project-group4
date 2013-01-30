@@ -1,10 +1,13 @@
 package ucn.dmf83.sem1project.group4.DomainLayer;
 
 import java.util.ArrayList;
+import java.io.Serializable;
 
-public class RentContainer {
+public class RentContainer implements Serializable {
 	
-private ArrayList<Rent> rents;
+	private static final long serialVersionUID = 8766215534461329299L;
+
+	private ArrayList<Rent> rents;
 	
 	private static RentContainer instance = null;
 

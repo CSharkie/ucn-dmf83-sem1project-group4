@@ -2,9 +2,12 @@ package ucn.dmf83.sem1project.group4.DomainLayer;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.io.Serializable;
 
-public class LocationContainer {
+public class LocationContainer implements Serializable {
 	
+	private static final long serialVersionUID = 3354847234590476836L;
+
 	private ArrayList<Location> locations;
 	
 	private static LocationContainer instance = null;

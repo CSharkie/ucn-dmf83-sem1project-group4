@@ -1,10 +1,13 @@
 package ucn.dmf83.sem1project.group4.DomainLayer;
 
 import java.util.ArrayList;
+import java.io.Serializable;
 
-public class ContractorContainer {
-	
-private ArrayList<Contractor> contractors;
+public class ContractorContainer implements Serializable {
+
+	private static final long serialVersionUID = -5712058401358043707L;
+
+	private ArrayList<Contractor> contractors;
 	
 	private static ContractorContainer instance = null;
 
