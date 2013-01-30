@@ -17,7 +17,7 @@ import ucn.dmf83.sem1project.group4.ControlLayer.SystemUserControl;
 import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.swt.widgets.ToolItem;
 
-public class GUITest {
+public class LoginScreen {
 
 	private static SystemUserControl SUcontrol;
 	private static SingleUserControl Ucontrol;
@@ -35,12 +35,14 @@ public class GUITest {
 		
 		SUcontrol = new SystemUserControl();
 		Ucontrol = SingleUserControl.getInstance();
+		
 		SUcontrol.flush();
 		SUcontrol.addSystemUser("test", "test");
+		SUcontrol.getSystemUser("test");
 		Ucontrol.setUser(null);
 		
 		try {
-			GUITest window = new GUITest();
+			LoginScreen window = new LoginScreen();
 			window.open();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -124,6 +126,29 @@ public class GUITest {
 		btnSupport.setBounds(329, 239, 200, 50);
 		btnSupport.setText("Register user with data above");
 		
+		final Button btnElevatedRights = new Button(shell, SWT.CHECK);
+		btnElevatedRights.setBounds(560, 239, 93, 16);
+		btnElevatedRights.setText("Elevated rights");
+		
+		final Button btnAdminMode = new Button(shell, SWT.CHECK);
+		btnAdminMode.setBounds(560, 273, 93, 16);
+		btnAdminMode.setText("Admin Mode");
+		
+		btnElevatedRights.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				SUcontrol.updateSystemUserRights(btnElevatedRights.getSelection(), btnAdminMode.getSelection());
+				Ucontrol.setUser(SUcontrol.getSystemUser());
+			}
+		});
+
+		btnAdminMode.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				SUcontrol.updateSystemUserRights(btnElevatedRights.getSelection(), btnAdminMode.getSelection());
+				Ucontrol.setUser(SUcontrol.getSystemUser());
+			}
+		});
 
 	}
 }

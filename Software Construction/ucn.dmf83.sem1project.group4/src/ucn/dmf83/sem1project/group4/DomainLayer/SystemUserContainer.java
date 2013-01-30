@@ -65,6 +65,15 @@ public class SystemUserContainer implements Serializable {
 			
 	}
 	
+	public void addSystemUser(SystemUser user) {
+		if(getSystemUser(user.getUserName()) == null)
+			systemUsers.add(user);
+		else {
+			systemUsers.remove(getSystemUser(user.getUserName()));
+			systemUsers.add(user);
+		}
+	}
+	
 	public void removeSystemUser(SystemUser user) {
 		systemUsers.remove(user);
 	}

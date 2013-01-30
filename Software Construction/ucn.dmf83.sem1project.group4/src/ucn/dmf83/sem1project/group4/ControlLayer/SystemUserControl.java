@@ -29,6 +29,13 @@ public class SystemUserControl {
 		addSystemUser(username,password);
 	}
 	
+	public void updateSystemUserRights(boolean isManager, boolean isAdmin) {
+		container.removeSystemUser(user);
+		user.setElevated(isManager);
+		user.setAdmin(isAdmin);
+		container.addSystemUser(user);
+	}
+	
 	public SystemUser authSystemUser(String username, String password) {
 		SystemUser tempuser = container.authenticate(username, password);
 		return tempuser;
@@ -36,5 +43,9 @@ public class SystemUserControl {
 	
 	public void flush() {
 		container.flush();
+	}
+	
+	public SystemUser getSystemUser() {
+		return this.user;
 	}
 }
