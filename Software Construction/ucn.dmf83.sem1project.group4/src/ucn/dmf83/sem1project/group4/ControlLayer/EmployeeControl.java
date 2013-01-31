@@ -36,4 +36,15 @@ public class EmployeeControl {
 	{
 		employee.setLocation(location);
 	}
+	
+	public void readFile()
+	{
+		
+	}
+	
+	public void saveFile()
+	{
+		
+	}
+	
 }

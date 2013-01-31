@@ -27,5 +27,15 @@ public class ContractorControl {
 	{
 		return contractor.getContractor(ID);
 	}
+	
+	public void readFile()
+	{
+		
+	}
+	
+	public void saveFile()
+	{
+		
+	}
 
 }

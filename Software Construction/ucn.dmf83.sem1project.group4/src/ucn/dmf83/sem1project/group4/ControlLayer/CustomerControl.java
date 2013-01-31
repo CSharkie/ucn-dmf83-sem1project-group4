@@ -32,6 +32,14 @@ public class CustomerControl {
 		customer.updateCustomer(original, newc);
 	}
 	
+	public void readFile()
+	{
+		
+	}
 	
+	public void saveFile()
+	{
+		
+	}
 	
 }
