@@ -75,10 +75,27 @@ public class Location {
 	
 	public Product getProduct(int ID)
 	{
-		for(Iterator<Product> i = stock.iterator(); i.hasNext();) {
-			Product p = i.next();
+		for(Product p:stock) {
 			if(p.getID() == ID)
 				return p;
+		}
+		
+		return null;
+	}
+	
+	public boolean hasDevice(Device device)
+	{
+		if(devices.contains(device))
+			return true;
+		else
+			return false;
+	}
+	
+	public Device getDevice(int ID)
+	{
+		for(Device d:this.devices) {
+			if(d.getID() == ID)
+				return d;
 		}
 		
 		return null;
@@ -92,6 +109,14 @@ public class Location {
 	public void addDevice(Device d)
 	{
 		devices.add(d);
+	}
+	
+	public ArrayList<Product> getProducts(){
+		return this.stock;
+	}
+	
+	public ArrayList<Device> getDevices(){
+		return this.devices;
 	}
 	
 }

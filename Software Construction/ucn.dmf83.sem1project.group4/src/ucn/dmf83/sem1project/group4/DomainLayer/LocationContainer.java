@@ -66,5 +66,75 @@ public class LocationContainer implements Serializable {
 		
 		return null;
 	}
+	
+	public ArrayList<Location> getLocations() {
+		return locations;
+	}
+	
+	public ArrayList<Product> getProducts(String location) {
+		ArrayList<Product> list = new ArrayList<Product>();
+		
+		Location temp = getLocation(location);
+		
+		for(Product p:temp.getProducts()) {
+			list.add(p);
+		}
+		
+		
+		return list;
+	}
+	
+	public ArrayList<Product> getProducts() {
+		ArrayList<Product> list = new ArrayList<Product>();
+		
+		for(Location l:locations) {
+			for(Product p:l.getProducts())
+				list.add(p);
+		}
+		
+		
+		return list;
+	}
+	
+	public ArrayList<Product> searchProducts(String location, String filter) {
+		ArrayList<Product> list = new ArrayList<Product>();
+		
+		Location temp = getLocation(location);
+		
+		for(Product p:temp.getProducts()) {
+			if(filter != "")
+				if(p.getName().toString().contains(filter) || Integer.toString(p.getID()).contains(filter))
+					list.add(p);
+		}
+		
+		
+		return list;
+	}
+	
+	public ArrayList<Product> searchProducts(String filter) {
+		ArrayList<Product> list = new ArrayList<Product>();
+
+		
+		for(Location l:locations) {
+			for(Product p:l.getProducts()) {
+				if(filter != "")
+					if(p.getName().toString().contains(filter) || Integer.toString(p.getID()).contains(filter))
+						list.add(p);
+			}
+		}
+		
+		
+		return list;
+	}
+	
+	public Product getProduct(int ID) {
+		Product pa = null;
+		
+		for(Location l:locations) {
+			if(l.getProduct(ID) != null )
+				pa = l.getProduct(ID);
+		}
+		return pa;
+	}
 
 }
