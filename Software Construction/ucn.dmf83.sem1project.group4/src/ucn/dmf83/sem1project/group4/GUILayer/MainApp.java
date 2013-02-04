@@ -1,21 +1,11 @@
 package ucn.dmf83.sem1project.group4.GUILayer;
 
-import java.awt.Color;
 
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
-import ucn.dmf83.sem1project.group4.ControlLayer.ContractorControl;
-import ucn.dmf83.sem1project.group4.ControlLayer.CustomerControl;
-import ucn.dmf83.sem1project.group4.ControlLayer.EmployeeControl;
-import ucn.dmf83.sem1project.group4.ControlLayer.LocationControl;
-import ucn.dmf83.sem1project.group4.ControlLayer.OfferControl;
-import ucn.dmf83.sem1project.group4.ControlLayer.OrderControl;
-import ucn.dmf83.sem1project.group4.ControlLayer.RentControl;
-import ucn.dmf83.sem1project.group4.ControlLayer.SingleUserControl;
-import ucn.dmf83.sem1project.group4.ControlLayer.SystemUserControl;
-import ucn.dmf83.sem1project.group4.DomainLayer.LocationContainer;
-import ucn.dmf83.sem1project.group4.DomainLayer.Product;
+import ucn.dmf83.sem1project.group4.ControlLayer.*;
+import ucn.dmf83.sem1project.group4.DomainLayer.*;
 
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.SWT;
@@ -35,18 +25,7 @@ import org.eclipse.swt.events.SelectionEvent;
 
 public class MainApp {
 	
-	private static SystemUserControl SUcontrol;
-	private static CustomerControl custControl;
-	private static LocationControl locControl;
-	private static EmployeeControl empControl;
-	private static ContractorControl contControl;
-	private static OfferControl offerControl;
-	private static OrderControl orderControl;
-	
-	
-	private static SingleUserControl Ucontrol;
-
-	protected Shell shlIcatalogWelcome;
+	protected Shell shell;
 	private TabFolder tabFolder;
 	
 	// Product screen
@@ -70,9 +49,6 @@ public class MainApp {
 	 */
 	public static void main(String[] args) {
 		
-		SUcontrol = new SystemUserControl();
-		Ucontrol = SingleUserControl.getInstance();
-		
 		try {
 			MainApp window = new MainApp();
 			window.open();
@@ -87,9 +63,13 @@ public class MainApp {
 	public void open() {
 		Display display = Display.getDefault();
 		createContents();
-		shlIcatalogWelcome.open();
-		shlIcatalogWelcome.layout();
-		while (!shlIcatalogWelcome.isDisposed()) {
+	    int x = display.getPrimaryMonitor().getBounds().x + (display.getPrimaryMonitor().getBounds().width - shell.getBounds().width) / 2;
+	    int y = display.getPrimaryMonitor().getBounds().y + (display.getPrimaryMonitor().getBounds().height - shell.getBounds().height) / 2;
+	    
+	    shell.setLocation(x, y);
+		shell.open();
+		shell.layout();
+		while (!shell.isDisposed()) {
 			if (!display.readAndDispatch()) {
 				display.sleep();
 			}
@@ -100,12 +80,12 @@ public class MainApp {
 	 * Create contents of the window.
 	 */
 	protected void createContents() {
-		shlIcatalogWelcome = new Shell();
-		shlIcatalogWelcome.setMinimumSize(new Point(800, 600));
-		shlIcatalogWelcome.setSize(450, 300);
-		shlIcatalogWelcome.setText("iCatalog - Welcome " + Ucontrol.getUser().getUserName() + "!");
+		shell = new Shell();
+		shell.setMinimumSize(new Point(800, 600));
+		shell.setSize(450, 300);
+		shell.setText("iCatalog - Welcome " + SingleUserControl.getInstance().getUser().getUserName() + "!");
 		
-		tabFolder = new TabFolder(shlIcatalogWelcome, SWT.NONE);
+		tabFolder = new TabFolder(shell, SWT.NONE);
 		tabFolder.setBounds(10, 10, 764, 541);
 		
 		tbtmProducts = new TabItem(tabFolder, SWT.NONE);

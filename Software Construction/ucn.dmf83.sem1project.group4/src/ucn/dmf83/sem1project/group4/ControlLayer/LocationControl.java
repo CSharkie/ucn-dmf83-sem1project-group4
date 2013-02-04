@@ -1,5 +1,9 @@
 package ucn.dmf83.sem1project.group4.ControlLayer;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import ucn.dmf83.sem1project.group4.DomainLayer.*;
@@ -11,9 +15,10 @@ public class LocationControl {
 	
 	private static LocationControl instance;
 	
-	public LocationControl()
+	protected LocationControl()
 	{
 		container = LocationContainer.getInstance();
+		
 	}
 	
 	public static LocationControl getInstance()
@@ -53,12 +58,28 @@ public class LocationControl {
 	
 	public void readFile()
 	{
+		try {
+		FileInputStream saveFile = new FileInputStream("location.dat");
+		ObjectInputStream restore = new ObjectInputStream(saveFile);
+		container = (LocationContainer) restore.readObject();
+		restore.close();
+		saveFile.close();
 		
+		} catch(Exception e) {}
 	}
 	
 	public void saveFile()
 	{
-		
+		try {
+			FileOutputStream saveFile = new FileOutputStream("location.dat");
+			ObjectOutputStream save = new ObjectOutputStream(saveFile);
+			save.writeObject(container);
+			save.close();
+			saveFile.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	

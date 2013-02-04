@@ -5,8 +5,6 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.swt.widgets.Menu;
-import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -14,8 +12,6 @@ import org.eclipse.swt.events.SelectionEvent;
 
 import ucn.dmf83.sem1project.group4.ControlLayer.SingleUserControl;
 import ucn.dmf83.sem1project.group4.ControlLayer.SystemUserControl;
-import org.eclipse.swt.widgets.ToolBar;
-import org.eclipse.swt.widgets.ToolItem;
 
 public class LoginScreen {
 
@@ -56,6 +52,10 @@ public class LoginScreen {
 		Display display = Display.getDefault();
 		createContents();
 		shell.open();
+	    int x = display.getPrimaryMonitor().getBounds().x + (display.getPrimaryMonitor().getBounds().width - shell.getBounds().width) / 2;
+	    int y = display.getPrimaryMonitor().getBounds().y + (display.getPrimaryMonitor().getBounds().height - shell.getBounds().height) / 2;
+	    
+	    shell.setLocation(x, y);
 		shell.layout();
 		while (!shell.isDisposed()) {
 			if (!display.readAndDispatch()) {
@@ -70,7 +70,8 @@ public class LoginScreen {
 	protected void createContents() {
 		shell = new Shell();
 		shell.setMinimumSize(new Point(800, 600));
-		shell.setSize(450, 300);
+		shell.setSize(800, 600);
+
 		shell.setText("iCatalog - Log In");
 		
 		txtUName = new Text(shell, SWT.BORDER);
@@ -131,7 +132,7 @@ public class LoginScreen {
 		btnElevatedRights.setText("Elevated rights");
 		
 		final Button btnAdminMode = new Button(shell, SWT.CHECK);
-		btnAdminMode.setBounds(560, 273, 93, 16);
+		btnAdminMode.setBounds(560, 261, 93, 16);
 		btnAdminMode.setText("Admin Mode");
 		
 		btnElevatedRights.addSelectionListener(new SelectionAdapter() {

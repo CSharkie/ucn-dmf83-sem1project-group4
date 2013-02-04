@@ -1,5 +1,11 @@
 package ucn.dmf83.sem1project.group4.ControlLayer;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
+import ucn.dmf83.sem1project.group4.DomainLayer.CustomerContainer;
 import ucn.dmf83.sem1project.group4.DomainLayer.SystemUser;
 import ucn.dmf83.sem1project.group4.DomainLayer.SystemUserContainer;
 
@@ -47,5 +53,31 @@ public class SystemUserControl {
 	
 	public SystemUser getSystemUser() {
 		return this.user;
+	}
+	
+	public void readFile()
+	{
+		try {
+		FileInputStream saveFile = new FileInputStream("user.dat");
+		ObjectInputStream restore = new ObjectInputStream(saveFile);
+		container = (SystemUserContainer) restore.readObject();
+		restore.close();
+		saveFile.close();
+		
+		} catch(Exception e) {}
+	}
+	
+	public void saveFile()
+	{
+		try {
+			FileOutputStream saveFile = new FileOutputStream("user.dat");
+			ObjectOutputStream save = new ObjectOutputStream(saveFile);
+			save.writeObject(container);
+			save.close();
+			saveFile.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

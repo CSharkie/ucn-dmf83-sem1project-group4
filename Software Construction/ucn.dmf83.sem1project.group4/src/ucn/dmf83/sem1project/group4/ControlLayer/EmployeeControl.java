@@ -1,5 +1,10 @@
 package ucn.dmf83.sem1project.group4.ControlLayer;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
 import ucn.dmf83.sem1project.group4.DomainLayer.*;
 
 /**
@@ -28,8 +33,8 @@ public class EmployeeControl {
 		container.removeEmloyee(ID);
 	}
 	
-	public void getEmployee(int ID) {
-		this.employee = container.getEmployee(ID);
+	public Employee getEmployee(int ID) {
+		return container.getEmployee(ID);
 	}
 	
 	public void updateEmployeeLocation(Location location)
@@ -39,12 +44,27 @@ public class EmployeeControl {
 	
 	public void readFile()
 	{
+		try {
+		FileInputStream saveFile = new FileInputStream("employee.dat");
+		ObjectInputStream restore = new ObjectInputStream(saveFile);
+		container = (EmployeeContainer) restore.readObject();
+		restore.close();
+		saveFile.close();
 		
+		} catch(Exception e) {}
 	}
 	
 	public void saveFile()
 	{
-		
+		try {
+			FileOutputStream saveFile = new FileOutputStream("employee.dat");
+			ObjectOutputStream save = new ObjectOutputStream(saveFile);
+			save.writeObject(container);
+			save.close();
+			saveFile.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
-	
 }

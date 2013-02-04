@@ -1,5 +1,9 @@
 package ucn.dmf83.sem1project.group4.ControlLayer;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Date;
 
 import ucn.dmf83.sem1project.group4.DomainLayer.*;
@@ -31,24 +35,46 @@ public class RentControl {
 		return rent;
 	}
 	
-	public Rent getRent(int ID)
+	public void getRent(int ID)
 	{
-		return container.getRent(ID);
+		this.rent = container.getRent(ID);
 	}
 	
-	public void removeRent(Rent rent)
+	public void removeRent()
 	{
-		container.removeRent(rent);
+		container.removeRent(this.rent);
+	}
+	
+	public void updateRent(Rent rent) {
+		container.removeRent(this.rent);
+		this.rent = rent;
+		container.addRent(this.rent);
 	}
 	
 	public void readFile()
 	{
+		try {
+		FileInputStream saveFile = new FileInputStream("rent.dat");
+		ObjectInputStream restore = new ObjectInputStream(saveFile);
+		container = (RentContainer) restore.readObject();
+		restore.close();
+		saveFile.close();
 		
+		} catch(Exception e) {}
 	}
 	
 	public void saveFile()
 	{
-		
+		try {
+			FileOutputStream saveFile = new FileOutputStream("rent.dat");
+			ObjectOutputStream save = new ObjectOutputStream(saveFile);
+			save.writeObject(container);
+			save.close();
+			saveFile.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

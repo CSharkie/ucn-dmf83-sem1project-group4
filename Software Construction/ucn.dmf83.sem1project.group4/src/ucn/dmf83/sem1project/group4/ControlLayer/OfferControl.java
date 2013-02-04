@@ -1,5 +1,9 @@
 package ucn.dmf83.sem1project.group4.ControlLayer;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Date;
 import java.util.ArrayList;
 
@@ -48,12 +52,28 @@ public class OfferControl {
 	
 	public void readFile()
 	{
+		try {
+		FileInputStream saveFile = new FileInputStream("offer.dat");
+		ObjectInputStream restore = new ObjectInputStream(saveFile);
+		container = (OfferContainer) restore.readObject();
+		restore.close();
+		saveFile.close();
 		
+		} catch(Exception e) {}
 	}
 	
 	public void saveFile()
 	{
-		
+		try {
+			FileOutputStream saveFile = new FileOutputStream("offer.dat");
+			ObjectOutputStream save = new ObjectOutputStream(saveFile);
+			save.writeObject(container);
+			save.close();
+			saveFile.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 }

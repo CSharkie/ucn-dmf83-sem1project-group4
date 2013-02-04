@@ -1,5 +1,9 @@
 package ucn.dmf83.sem1project.group4.ControlLayer;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -31,9 +35,9 @@ public class OrderControl {
         return order;
     }
 	
-	public Order getOrder(int ID)
+	public void getOrder(int ID)
     {
-        return container.getOrder(ID);
+        this.order = container.getOrder(ID);
     }
 	
 	public ArrayList<Order> getOrders(Date startDate, Date endDate)
@@ -63,12 +67,28 @@ public class OrderControl {
 	
 	public void readFile()
 	{
+		try {
+		FileInputStream saveFile = new FileInputStream("order.dat");
+		ObjectInputStream restore = new ObjectInputStream(saveFile);
+		container = (OrderContainer) restore.readObject();
+		restore.close();
+		saveFile.close();
 		
+		} catch(Exception e) {}
 	}
 	
 	public void saveFile()
 	{
-		
+		try {
+			FileOutputStream saveFile = new FileOutputStream("order.dat");
+			ObjectOutputStream save = new ObjectOutputStream(saveFile);
+			save.writeObject(container);
+			save.close();
+			saveFile.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

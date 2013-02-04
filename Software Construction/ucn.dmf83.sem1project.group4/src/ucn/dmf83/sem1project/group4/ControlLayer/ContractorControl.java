@@ -57,8 +57,6 @@ public class ContractorControl {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
 	}
 
 }
