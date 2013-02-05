@@ -22,6 +22,7 @@ import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.widgets.DateTime;
 
 public class MainApp {
 	
@@ -41,6 +42,33 @@ public class MainApp {
 	private List listProduct;
 	private Group displayProduct;
 	private Canvas barcodeProduct;
+	
+	private Text searchCustomer;
+	private Text txtCustomerGroupName;
+	private Text txtCustomerName;
+	private Text txtCustomerID;
+	
+	private Text searchEmployee;
+	private Text txtEmployeeDepartment;
+	private Text txtEmployeeName;
+	private Text txtEmployeeID;
+	
+	private Text searchLocation;
+	private Text txtLocationAddress;
+	private Text txtLocationName;
+	private Text txtLocationID;
+	
+	private Text searchOrder;
+	private Text txtOrderSeller;
+	private Text txtOrderID;
+	private Text txtOrderCustomerName;
+	
+	private Text searchRents;
+	private Text txtRentsRenter;
+	private Text txtRentsLength;
+	private Text txtRentsID;
+	private Text txtRentsCustomerName;
+	private Text txtRentsDevice;
 	
 
 	/**
@@ -193,24 +221,243 @@ public class MainApp {
 		Composite compositeCustomers = new Composite(tabFolder, SWT.NONE);
 		tbtmCustomers.setControl(compositeCustomers);
 		
+		searchCustomer = new Text(compositeCustomers, SWT.BORDER);
+		searchCustomer.setBounds(10, 10, 320, 21);
+		
+		List listCustomers = new List(compositeCustomers, SWT.BORDER);
+		listCustomers.setBounds(10, 37, 320, 466);
+		
+		Group displayCustomer = new Group(compositeCustomers, SWT.NONE);
+		displayCustomer.setBounds(336, 10, 410, 450);
+		
+		Label label = new Label(displayCustomer, SWT.NONE);
+		label.setText("Description:");
+		label.setBounds(10, 75, 65, 15);
+		
+		txtCustomerGroupName = new Text(displayCustomer, SWT.BORDER);
+		txtCustomerGroupName.setBounds(81, 72, 319, 21);
+		
+		txtCustomerName = new Text(displayCustomer, SWT.BORDER);
+		txtCustomerName.setBounds(81, 21, 319, 21);
+		
+		txtCustomerID = new Text(displayCustomer, SWT.BORDER);
+		txtCustomerID.setBounds(81, 45, 185, 21);
+		
+		Label label_2 = new Label(displayCustomer, SWT.NONE);
+		label_2.setText("Name:");
+		label_2.setBounds(10, 24, 55, 15);
+		
+		Label label_3 = new Label(displayCustomer, SWT.NONE);
+		label_3.setText("ID:");
+		label_3.setBounds(10, 48, 55, 15);
+		
+		Button btnReloadCustomer = new Button(compositeCustomers, SWT.NONE);
+		btnReloadCustomer.setText("RELOAD LIST");
+		btnReloadCustomer.setBounds(336, 466, 92, 37);
+		
+		Button btnAddNewCustomer = new Button(compositeCustomers, SWT.NONE);
+		btnAddNewCustomer.setText("ADD AS NEW");
+		btnAddNewCustomer.setBounds(646, 466, 100, 37);
+		
+		Button btnDeleteCustomer = new Button(compositeCustomers, SWT.NONE);
+		btnDeleteCustomer.setText("DELETE");
+		btnDeleteCustomer.setBounds(434, 466, 100, 37);
+		
+		Button btnSaveCustomer = new Button(compositeCustomers, SWT.NONE);
+		btnSaveCustomer.setText("SAVE");
+		btnSaveCustomer.setBounds(540, 466, 100, 37);
+		
 		TabItem tbtmOrders = new TabItem(tabFolder, SWT.NONE);
 		tbtmOrders.setText("Orders");
 		
 		Composite compositeOrders = new Composite(tabFolder, SWT.NONE);
 		tbtmOrders.setControl(compositeOrders);
 		
+		searchOrder = new Text(compositeOrders, SWT.BORDER);
+		searchOrder.setBounds(10, 10, 320, 21);
+		
+		List listOrders = new List(compositeOrders, SWT.BORDER);
+		listOrders.setBounds(10, 37, 320, 466);
+		
+		Group displayOrder = new Group(compositeOrders, SWT.NONE);
+		displayOrder.setBounds(336, 10, 410, 450);
+		
+		Label lblSeller = new Label(displayOrder, SWT.NONE);
+		lblSeller.setText("Seller:");
+		lblSeller.setBounds(10, 75, 65, 15);
+		
+		txtOrderSeller = new Text(displayOrder, SWT.BORDER);
+		txtOrderSeller.setBounds(111, 72, 289, 21);
+		
+		txtOrderID = new Text(displayOrder, SWT.BORDER);
+		txtOrderID.setBounds(111, 21, 289, 21);
+		
+		txtOrderCustomerName = new Text(displayOrder, SWT.BORDER);
+		txtOrderCustomerName.setBounds(111, 45, 289, 21);
+		
+		Label lblId_1 = new Label(displayOrder, SWT.NONE);
+		lblId_1.setText("ID:");
+		lblId_1.setBounds(10, 24, 55, 15);
+		
+		Label lblCustomerName = new Label(displayOrder, SWT.NONE);
+		lblCustomerName.setText("Customer Name:");
+		lblCustomerName.setBounds(10, 48, 95, 15);
+		
+		Label lblDate = new Label(displayOrder, SWT.NONE);
+		lblDate.setText("Date:");
+		lblDate.setBounds(10, 104, 65, 15);
+		
+		DateTime dateOrder = new DateTime(displayOrder, SWT.BORDER);
+		dateOrder.setBounds(111, 99, 80, 24);
+		
+		Label lblPaid = new Label(displayOrder, SWT.NONE);
+		lblPaid.setText("Paid:");
+		lblPaid.setBounds(10, 134, 65, 15);
+		
+		Button btnCheckButton = new Button(displayOrder, SWT.CHECK);
+		btnCheckButton.setBounds(111, 134, 93, 16);
+		
+		Button btnReloadOrder = new Button(compositeOrders, SWT.NONE);
+		btnReloadOrder.setText("RELOAD LIST");
+		btnReloadOrder.setBounds(336, 466, 92, 37);
+		
+		Button btnDeleteOrder = new Button(compositeOrders, SWT.NONE);
+		btnDeleteOrder.setText("DELETE");
+		btnDeleteOrder.setBounds(434, 466, 100, 37);
+		
+		Button btnSaveOrder = new Button(compositeOrders, SWT.NONE);
+		btnSaveOrder.setText("SAVE");
+		btnSaveOrder.setBounds(540, 466, 100, 37);
+		
+		Button btnAddNewOrder = new Button(compositeOrders, SWT.NONE);
+		btnAddNewOrder.setText("ADD AS NEW");
+		btnAddNewOrder.setBounds(646, 466, 100, 37);
+		
 		TabItem tbtmRents = new TabItem(tabFolder, SWT.NONE);
 		tbtmRents.setText("Rents");
 		
 		Composite composite = new Composite(tabFolder, SWT.NONE);
 		tbtmRents.setControl(composite);
+		  
+		searchRents = new Text(composite, SWT.BORDER);
+		searchRents.setBounds(10, 10, 320, 21);
+		  
+		List listRents = new List(composite, SWT.BORDER);
+		listRents.setBounds(10, 37, 320, 466);
+		  
+		Group displayRents = new Group(composite, SWT.NONE);
+		displayRents.setBounds(336, 10, 410, 450);
+		  
+		Label lblRenter = new Label(displayRents, SWT.NONE);
+		lblRenter.setText("Renter:");
+		lblRenter.setBounds(10, 75, 65, 15);
+		  
+		txtRentsRenter = new Text(displayRents, SWT.BORDER);
+		txtRentsRenter.setBounds(106, 72, 294, 21);
+		  
+		Label lblLength = new Label(displayRents, SWT.NONE);
+		lblLength.setText("Length:");
+		lblLength.setBounds(10, 153, 65, 15);
+		  
+		txtRentsLength = new Text(displayRents, SWT.BORDER);
+		txtRentsLength.setBounds(106, 150, 294, 21);
+		  
+		txtRentsID = new Text(displayRents, SWT.BORDER);
+		txtRentsID.setBounds(106, 21, 294, 21);
+		  
+		txtRentsCustomerName = new Text(displayRents, SWT.BORDER);
+		txtRentsCustomerName.setBounds(106, 45, 294, 21);
+		  
+		Label lblID = new Label(displayRents, SWT.NONE);
+		lblID.setText("ID:");
+		lblID.setBounds(10, 24, 55, 15);
+		  
+		Label lblCustomerName1 = new Label(displayRents, SWT.NONE);
+		lblCustomerName1.setText("Customer Name:");
+		lblCustomerName1.setBounds(10, 48, 90, 15);
+		  
+		Label lblDevice = new Label(displayRents, SWT.NONE);
+		lblDevice.setText("Device:");
+		lblDevice.setBounds(10, 100, 65, 15);
+		  
+		txtRentsDevice = new Text(displayRents, SWT.BORDER);
+		txtRentsDevice.setBounds(106, 96, 294, 21);
+		  
+		Label lblStartDate = new Label(displayRents, SWT.NONE);
+		lblStartDate.setText("Start Date:");
+		lblStartDate.setBounds(10, 121, 65, 15);
+		
+		DateTime dateTime = new DateTime(displayRents, SWT.BORDER);
+		dateTime.setBounds(106, 120, 80, 24);
+		  
+		Button btnReloadRent = new Button(composite, SWT.NONE);
+		btnReloadRent.setText("RELOAD LIST");
+		btnReloadRent.setBounds(336, 466, 92, 37);
+		  
+		Button btnDeleteRent = new Button(composite, SWT.NONE);
+		btnDeleteRent.setText("DELETE");
+		btnDeleteRent.setBounds(434, 466, 100, 37);
+		  
+		Button btnSaveRent = new Button(composite, SWT.NONE);
+		btnSaveRent.setText("SAVE");
+		btnSaveRent.setBounds(540, 466, 100, 37);
+		  
+		Button btnAddNewRent = new Button(composite, SWT.NONE);
+		btnAddNewRent.setText("ADD AS NEW");
+		btnAddNewRent.setBounds(646, 466, 100, 37);
 		
 		//if(Ucontrol.getUser().isElevated() || Ucontrol.getUser().isAdmin()) {
 			TabItem tbtmEmployees = new TabItem(tabFolder, SWT.NONE);
 			tbtmEmployees.setText("Employees");
 			
-			Composite composite_2 = new Composite(tabFolder, SWT.NONE);
-			tbtmEmployees.setControl(composite_2);
+			Composite compositeEmployee = new Composite(tabFolder, SWT.NONE);
+			tbtmEmployees.setControl(compositeEmployee);
+			
+			searchEmployee = new Text(compositeEmployee, SWT.BORDER);
+			searchEmployee.setBounds(10, 10, 320, 21);
+			
+			List listEmployees = new List(compositeEmployee, SWT.BORDER);
+			listEmployees.setBounds(10, 37, 320, 466);
+			
+			Group displayEmployee = new Group(compositeEmployee, SWT.NONE);
+			displayEmployee.setBounds(336, 10, 410, 450);
+			
+			Label lblDepartment = new Label(displayEmployee, SWT.NONE);
+			lblDepartment.setText("Department:");
+			lblDepartment.setBounds(10, 75, 65, 15);
+			
+			txtEmployeeDepartment = new Text(displayEmployee, SWT.BORDER);
+			txtEmployeeDepartment.setBounds(81, 72, 319, 21);
+			
+			txtEmployeeName = new Text(displayEmployee, SWT.BORDER);
+			txtEmployeeName.setBounds(81, 21, 319, 21);
+			
+			txtEmployeeID = new Text(displayEmployee, SWT.BORDER);
+			txtEmployeeID.setBounds(81, 45, 185, 21);
+			
+			Label label_4 = new Label(displayEmployee, SWT.NONE);
+			label_4.setText("Name:");
+			label_4.setBounds(10, 24, 55, 15);
+			
+			Label label_5 = new Label(displayEmployee, SWT.NONE);
+			label_5.setText("ID:");
+			label_5.setBounds(10, 48, 55, 15);
+			
+			Button btnReloadEmployee = new Button(compositeEmployee, SWT.NONE);
+			btnReloadEmployee.setText("RELOAD LIST");
+			btnReloadEmployee.setBounds(336, 466, 92, 37);
+			
+			Button btnDeleteEmployee = new Button(compositeEmployee, SWT.NONE);
+			btnDeleteEmployee.setText("DELETE");
+			btnDeleteEmployee.setBounds(434, 466, 100, 37);
+			
+			Button btnSaveEmployee = new Button(compositeEmployee, SWT.NONE);
+			btnSaveEmployee.setText("SAVE");
+			btnSaveEmployee.setBounds(540, 466, 100, 37);
+			
+			Button btnAddNewEmployee = new Button(compositeEmployee, SWT.NONE);
+			btnAddNewEmployee.setText("ADD AS NEW");
+			btnAddNewEmployee.setBounds(646, 466, 100, 37);
 			
 			TabItem tbtmContractors = new TabItem(tabFolder, SWT.NONE);
 			tbtmContractors.setText("Contractors");
@@ -220,6 +467,55 @@ public class MainApp {
 			
 			TabItem tbtmLocations = new TabItem(tabFolder, SWT.NONE);
 			tbtmLocations.setText("Locations");
+			
+			Composite compositeLocations = new Composite(tabFolder, SWT.NONE);
+			tbtmLocations.setControl(compositeLocations);
+			   
+			searchLocation = new Text(compositeLocations, SWT.BORDER);
+			searchLocation.setBounds(10, 10, 320, 21);
+			   
+			List listLocation = new List(compositeLocations, SWT.BORDER);
+			listLocation.setBounds(10, 37, 320, 466);
+			   
+			Group displayLocation = new Group(compositeLocations, SWT.NONE);
+			displayLocation.setBounds(336, 10, 410, 450);
+			   
+			txtLocationAddress = new Text(displayLocation, SWT.BORDER);
+			txtLocationAddress.setBounds(81, 72, 319, 79);
+			   
+			txtLocationName = new Text(displayLocation, SWT.BORDER);
+			txtLocationName.setBounds(81, 21, 319, 21);
+			   
+			txtLocationID = new Text(displayLocation, SWT.BORDER);
+			txtLocationID.setBounds(81, 45, 185, 21);
+			   
+			Label txtName = new Label(displayLocation, SWT.NONE);
+			txtName.setText("Name:");
+			txtName.setBounds(10, 24, 55, 15);
+			   
+			Label txtID = new Label(displayLocation, SWT.NONE);
+			txtID.setText("ID:");
+			txtID.setBounds(10, 48, 55, 15);
+			   
+			Label lblAddress = new Label(displayLocation, SWT.NONE);
+			lblAddress.setText("Address:");
+			lblAddress.setBounds(10, 75, 65, 15);
+			   
+			Button btnReloadLocation = new Button(compositeLocations, SWT.NONE);
+			btnReloadLocation.setText("RELOAD LIST");
+			btnReloadLocation.setBounds(336, 466, 92, 37);
+			   
+			Button btnDeleteLocation = new Button(compositeLocations, SWT.NONE);
+			btnDeleteLocation.setText("DELETE");
+			btnDeleteLocation.setBounds(434, 466, 100, 37);
+			   
+			Button btnSaveLocation = new Button(compositeLocations, SWT.NONE);
+			btnSaveLocation.setText("SAVE");
+			btnSaveLocation.setBounds(540, 466, 100, 37);
+			   
+			Button btnAddNewLocation = new Button(compositeLocations, SWT.NONE);
+			btnAddNewLocation.setText("ADD AS NEW");
+			btnAddNewLocation.setBounds(646, 466, 100, 37);
 		//}
 		//if(Ucontrol.getUser().isAdmin()) {
 			TabItem tbtmAdmin = new TabItem(tabFolder, SWT.NONE);

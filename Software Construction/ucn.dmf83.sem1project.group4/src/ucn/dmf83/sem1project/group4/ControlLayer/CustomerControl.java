@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 
 import ucn.dmf83.sem1project.group4.DomainLayer.*;
 
@@ -35,6 +36,21 @@ public class CustomerControl {
 	public void updateCustomer(Customer original, Customer newc)
 	{
 		container.updateCustomer(original, newc);
+	}
+	
+	public Customer getCustomer(int ID)
+	{
+		return container.getCustomer(ID);
+	}
+	
+	public ArrayList<Customer> getCustomer(String partialName)
+	{
+		return container.getCustomers(partialName);
+	}
+	
+	public customerGroup getCustomerGroup(int ID)
+	{
+		return container.getCustomerGroup(ID);
 	}
 	
 	public void readFile()
