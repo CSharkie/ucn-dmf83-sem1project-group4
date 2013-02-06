@@ -57,6 +57,10 @@ public class CustomerControl {
 		return container.getCustomerGroup(ID);
 	}
 	
+	public ArrayList<Customer> searchCustomers(String filter) {
+		return this.container.searchCustomers(filter);
+	}
+	
 	public void readFile()
 	{
 		try {

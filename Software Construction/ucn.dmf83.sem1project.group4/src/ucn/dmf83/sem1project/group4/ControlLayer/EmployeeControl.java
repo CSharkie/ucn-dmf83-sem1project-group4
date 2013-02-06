@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 
 import ucn.dmf83.sem1project.group4.DomainLayer.*;
 
@@ -44,6 +45,10 @@ public class EmployeeControl {
 	{
 		employee.setLocation(location);
 		saveFile();
+	}
+	
+	public ArrayList<Employee> searchEmployees(String filter) {
+		return this.container.searchEmployees(filter);
 	}
 	
 	public void readFile()

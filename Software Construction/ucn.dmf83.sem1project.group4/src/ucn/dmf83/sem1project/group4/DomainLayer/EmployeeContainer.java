@@ -72,5 +72,21 @@ public class EmployeeContainer implements Serializable {
 			employees.remove(employee);
 		}
 	}
+	
+	public ArrayList<Employee> searchEmployees(String filter) {
+		ArrayList<Employee> list = new ArrayList<Employee>();
+
+		
+		for(Employee l:employees) {
+				if(filter != "") {
+					if(("" + l.getName()).toString().contains(filter) || (""+l.getID()).toString().contains(filter))
+						list.add(l);
+				} else {
+					list.add(l);
+				}
+		}
+		
+		return list;
+	}
 
 }

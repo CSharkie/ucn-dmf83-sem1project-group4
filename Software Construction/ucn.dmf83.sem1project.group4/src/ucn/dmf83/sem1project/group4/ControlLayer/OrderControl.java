@@ -66,6 +66,10 @@ public class OrderControl {
 		saveFile();
 	}
 	
+	public ArrayList<Order> searchOrders(String filter) {
+		return this.container.searchOrders(filter);
+	}
+	
 	public void readFile()
 	{
 		try {

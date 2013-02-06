@@ -140,7 +140,7 @@ public class LocationContainer implements Serializable {
 		
 		for(Location l:locations) {
 				if(filter != "") {
-					if(("" + l.getName()).toString().contains(filter) || (""+l.getAddress()).toString().contains(filter))
+					if(("" + l.getName()).toString().contains(filter) || (""+l.getAddress()).toString().contains(filter) || (""+l.getID()).toString().contains(filter))
 						list.add(l);
 				} else {
 					list.add(l);

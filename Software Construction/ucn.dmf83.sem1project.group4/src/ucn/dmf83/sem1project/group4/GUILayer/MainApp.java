@@ -28,7 +28,6 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Spinner;
-import org.eclipse.wb.swt.SWTResourceManager;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 
@@ -111,6 +110,7 @@ public class MainApp {
 	private Button btnDeleteLocation;
 	private Button btnSaveLocation;
 	private Button btnAddNewLocation;
+	private Button buttonSave;
 	
 
 	/**
@@ -229,7 +229,6 @@ public class MainApp {
 		
 		btnDeleteProduct = new Button(compositeProducts, SWT.NONE);
 		btnDeleteProduct.setEnabled(false);
-		btnDeleteProduct.setFont(SWTResourceManager.getFont("Calibri", 12, SWT.NORMAL));
 		btnDeleteProduct.setBounds(346, 466, 82, 37);
 		btnDeleteProduct.setText("DELETE");
 		
@@ -252,7 +251,6 @@ public class MainApp {
 		btnAddNewProduct.setText("ADD NEW");
 		
 		btnReloadProduct = new Button(compositeProducts, SWT.NONE);
-		btnReloadProduct.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
 		btnReloadProduct.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {searchProduct.setText(""); searchProducts();}
@@ -260,7 +258,7 @@ public class MainApp {
 		btnReloadProduct.setText("R");
 		btnReloadProduct.setBounds(309, 10, 21, 21);
 		
-		Button buttonSave = new Button(compositeProducts, SWT.NONE);
+		buttonSave = new Button(compositeProducts, SWT.NONE);
 		buttonSave.setEnabled(false);
 		buttonSave.setText("SAVE");
 		buttonSave.setBounds(434, 466, 100, 37);

@@ -101,4 +101,21 @@ public class CustomerContainer implements Serializable {
 			customers.remove(customer);
 		}
 	}
+	
+	public ArrayList<Customer> searchCustomers(String filter) {
+		ArrayList<Customer> list = new ArrayList<Customer>();
+
+		
+		for(Customer l:customers) {
+				if(filter != "") {
+					if(("" + l.getName()).toString().contains(filter) || (""+l.getAddress()).toString().contains(filter) || (""+l.getID()).toString().contains(filter) || (""+l.getEmail()).toString().contains(filter))
+						list.add(l);
+				} else {
+					list.add(l);
+				}
+		}
+		
+		return list;
+	}
+	
 }

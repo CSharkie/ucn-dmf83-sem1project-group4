@@ -83,5 +83,21 @@ public class OrderContainer implements Serializable {
 		
 		return orders;
 	}
+	
+	public ArrayList<Order> searchOrders(String filter) {
+		ArrayList<Order> list = new ArrayList<Order>();
+
+		
+		for(Order l:orders) {
+				if(filter != "") {
+					if(("" + l.getCustomer()).toString().contains(filter) || (""+l.getSeller()).toString().contains(filter) || (""+l.getID()).toString().contains(filter))
+						list.add(l);
+				} else {
+					list.add(l);
+				}
+		}
+		
+		return list;
+	}
 
 }
