@@ -297,6 +297,14 @@ public class MainApp {
 		btnEditProduct.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
+				btnDeleteProduct.setEnabled(true);
+				btnAddNewProduct.setEnabled(false);
+				btnSaveProduct.setEnabled(true);
+				btnEditProduct.setEnabled(false);
+				
+				txtProductName.setEnabled(true);
+				txtProductDescription.setEnabled(true);
+				txtProductDepot.setEnabled(true);
 			}
 		});
 		btnEditProduct.setBounds(540, 466, 100, 37);
@@ -306,6 +314,14 @@ public class MainApp {
 		btnAddNewProduct.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
+				btnDeleteProduct.setEnabled(false);
+				btnAddNewProduct.setEnabled(true);
+				btnSaveProduct.setEnabled(false);
+				btnEditProduct.setEnabled(false);
+				
+				txtProductName.setEnabled(true);
+				txtProductDescription.setEnabled(true);
+				txtProductDepot.setEnabled(true);
 			}
 		});
 		btnAddNewProduct.setBounds(646, 466, 100, 37);
@@ -415,6 +431,23 @@ public class MainApp {
 		btnReloadCustomer.setBounds(309, 10, 21, 21);
 		
 		btnAddNewCustomer = new Button(compositeCustomers, SWT.NONE);
+		btnAddNewCustomer.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				btnDeleteCustomer.setEnabled(false);
+				btnAddNewCustomer.setEnabled(false);
+				btnSaveCustomer.setEnabled(true);
+				btnEditCustomer.setEnabled(false);
+				
+				txtCustomerID.setEnabled(true);
+				txtCustomerName.setEnabled(true);
+				combo.setEnabled(true);
+				spinnerPDiscount.setEnabled(true);
+				spinnerTDiscount.setEnabled(true);
+				
+				
+			}
+		});
 		btnAddNewCustomer.setText("ADD NEW");
 		btnAddNewCustomer.setBounds(646, 466, 100, 37);
 		
@@ -424,10 +457,30 @@ public class MainApp {
 		btnDeleteCustomer.setBounds(336, 466, 100, 37);
 		
 		btnEditCustomer = new Button(compositeCustomers, SWT.NONE);
+		btnEditCustomer.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				btnDeleteCustomer.setEnabled(true);
+				btnAddNewCustomer.setEnabled(false);
+				btnSaveCustomer.setEnabled(true);
+				btnEditCustomer.setEnabled(false);
+				
+				txtCustomerName.setEnabled(true);
+				combo.setEnabled(true);
+				spinnerPDiscount.setEnabled(true);
+				spinnerTDiscount.setEnabled(true);
+			}
+		});
 		btnEditCustomer.setBounds(548, 466, 92, 37);
 		btnEditCustomer.setText("EDIT");
 		
 		btnSaveCustomer = new Button(compositeCustomers, SWT.NONE);
+		btnSaveCustomer.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				Customer corg = CustomerControl.getInstance().getCustomer(Integer.parseInt(txtCustomerID.getText().toString()));
+			}
+		});
 		btnSaveCustomer.setEnabled(false);
 		btnSaveCustomer.setBounds(442, 466, 100, 37);
 		btnSaveCustomer.setText("SAVE");
