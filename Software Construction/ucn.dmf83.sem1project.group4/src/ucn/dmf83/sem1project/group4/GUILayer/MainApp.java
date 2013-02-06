@@ -289,6 +289,15 @@ public class MainApp {
 		lblId.setText("ID:");
 		
 		btnDeleteProduct = new Button(compositeProducts, SWT.NONE);
+		btnDeleteProduct.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				btnDeleteProduct.setEnabled(true);
+				btnAddNewProduct.setEnabled(false);
+				btnSaveProduct.setEnabled(false);
+				btnEditProduct.setEnabled(false);
+			}
+		});
 		btnDeleteProduct.setEnabled(false);
 		btnDeleteProduct.setBounds(346, 466, 82, 37);
 		btnDeleteProduct.setText("DELETE");
@@ -336,6 +345,12 @@ public class MainApp {
 		btnReloadProduct.setBounds(309, 10, 21, 21);
 		
 		btnSaveProduct = new Button(compositeProducts, SWT.NONE);
+		btnSaveProduct.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				
+			}
+		});
 		btnSaveProduct.setEnabled(false);
 		btnSaveProduct.setText("SAVE");
 		btnSaveProduct.setBounds(434, 466, 100, 37);
@@ -617,6 +632,20 @@ public class MainApp {
 		btnEditOrder.setText("EDIT");
 		
 		btnAddNewOrder = new Button(compositeOrders, SWT.NONE);
+		btnAddNewOrder.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				btnDeleteOrder.setEnabled(true);
+				btnAddNewOrder.setEnabled(false);
+				btnSaveOrder.setEnabled(true);
+				btnEditOrder.setEnabled(false);
+				
+				txtOrderID.setEnabled(true);
+				txtOrderCustomerName.setEnabled(true);
+				txtOrderSeller.setEnabled(true);
+				dateOrder.setEnabled(true);
+			}
+		});
 		btnAddNewOrder.setBounds(646, 466, 100, 37);
 		btnAddNewOrder.setText("ADD NEW");
 		
