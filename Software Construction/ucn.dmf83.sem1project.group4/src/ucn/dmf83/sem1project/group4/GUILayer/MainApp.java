@@ -190,7 +190,11 @@ public class MainApp {
 		LocationControl.getInstance().getLocation(0).addProduct(new Product(4,"Test Lumber","Test Lumber, only for testers!"));
 		LocationControl.getInstance().getLocation(0).addProduct(new Product(5,"Test Lumber","Test Lumber, only for testers!"));
 		
+		customerGroup cgrp = new customerGroup(0,"Default");
+		CustomerControl.getInstance().createCustomer("Customer1",0,cgrp);
 		
+		Location loc = new Location(0,"Test Road 1, 0000 Beta Town");
+		EmployeeControl.getInstance().createEmployee("Employee1",loc);
 		
 		
 		Order o = new Order(0, new Customer(), new Employee(), new Date(), false);
@@ -683,6 +687,13 @@ public class MainApp {
 			label_5.setBounds(10, 24, 55, 15);
 			
 			btnReloadEmployee = new Button(compositeEmployee, SWT.NONE);
+			btnReloadEmployee.addSelectionListener(new SelectionAdapter() {
+				@Override
+				public void widgetSelected(SelectionEvent e) {
+					searchEmployee.setText("");
+					searchEmployees();
+				}
+			});
 			btnReloadEmployee.setText("R");
 			btnReloadEmployee.setBounds(309, 10, 21, 21);
 			
@@ -858,19 +869,38 @@ public class MainApp {
 	}
 	
 	public void showCustomerDetails() {
-		
+		int ID = findNextValidInteger(listCustomers.getSelection()[0]);
+	    System.out.println("MainApp - Customer - Selected item ID: " + ID);
+	    
+	    Customer c = CustomerControl.getInstance().getCustomer(ID);
+	    displayCustomer.setText(c.getID() + " - " + c.getName());
+	    txtCustomerName.setText(c.getName() + "");
+	    txtCustomerID.setText(c.getID() + "");
 	}
 	
 	public void searchCustomers() {
-		
-	}
+		listCustomers.removeAll();
+	    for(Customer c:CustomerControl.getInstance().searchCustomers(searchCustomer.getText())) {
+	    	listCustomers.add(c.getID() + "    " + c.getName() + " " + c.getGroup().getName());
+	    }
+	  }
 	
 	public void showEmployeeDetails() {
-		
-	}
+		int ID = findNextValidInteger(listEmployees.getSelection()[0]);
+	    System.out.println("MainApp - Employee - Selected item ID: " + ID);
+	    
+	    Employee e = EmployeeControl.getInstance().getEmployee(ID);
+	    displayEmployee.setText(e.getID() + " - " + e.getName());
+	    txtEmployeeName.setText(e.getName() + "");
+	    txtEmployeeID.setText(e.getID() + "");
+	    txtEmployeeDepartment.setText(e.getLocation() + "");
+	    }
 	
 	public void searchEmployees() {
-		
+		listEmployees.removeAll();
+	    for(Employee e:EmployeeControl.getInstance().searchEmployees(searchEmployee.getText())) {
+	    	listEmployees.add(e.getID() + "    " + e.getName() + " " + e.getLocation().getName());
+	    }
 	}
 	
 	

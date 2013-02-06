@@ -18,14 +18,14 @@ public class CustomerControl {
 	 */
 	private CustomerContainer container;
 	
-	private CustomerControl instance = null;
+	private static CustomerControl instance = null;
 	
 	public CustomerControl()
 	{
 		readFile();
 	}
 	
-	public CustomerControl getInstance() {
+	public static CustomerControl getInstance() {
 		if(instance == null)
 			instance = new CustomerControl();
 		

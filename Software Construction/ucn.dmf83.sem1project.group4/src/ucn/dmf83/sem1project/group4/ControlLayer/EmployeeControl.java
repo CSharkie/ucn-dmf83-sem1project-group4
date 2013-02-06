@@ -18,14 +18,14 @@ public class EmployeeControl {
 	 */
 	private EmployeeContainer container;
 	private Employee employee;
-	private EmployeeControl instance = null;
+	private static EmployeeControl instance = null;
 	
 	protected EmployeeControl()
 	{
 		readFile();
 	}
 	
-	public EmployeeControl getInstance() {
+	public static EmployeeControl getInstance() {
 		if(instance == null)
 			instance = new EmployeeControl();
 		
