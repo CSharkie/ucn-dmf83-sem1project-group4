@@ -11,10 +11,17 @@ public class SystemUserControl {
 	private SystemUserContainer container;
 	private SystemUser user;
 	
+	private SystemUserControl instance = null;
 	
 	public SystemUserControl() {
 		readFile();
+	}
+	
+	public SystemUserControl getInstance() {
+		if(instance == null)
+			instance = new SystemUserControl();
 		
+		return instance;
 	}
 	
 

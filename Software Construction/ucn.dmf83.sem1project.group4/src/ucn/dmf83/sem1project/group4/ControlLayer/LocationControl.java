@@ -13,7 +13,7 @@ public class LocationControl {
 	private LocationContainer container;
 	private Location location;
 	
-	private static LocationControl instance;
+	private static LocationControl instance = null;
 	
 	protected LocationControl()
 	{

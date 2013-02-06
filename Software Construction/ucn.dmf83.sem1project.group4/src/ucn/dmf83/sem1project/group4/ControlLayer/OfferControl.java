@@ -11,7 +11,7 @@ import ucn.dmf83.sem1project.group4.DomainLayer.*;
 
 public class OfferControl {
 	private OfferContainer container;
-	private static OfferControl instance;
+	private static OfferControl instance = null;
 	
 	private Offer offer;
 	

@@ -13,7 +13,7 @@ public class RentControl {
 	private RentContainer container;
 	private Rent rent;
 	
-	private static RentControl instance;
+	private static RentControl instance = null;
 	
 	public RentControl()
 	{

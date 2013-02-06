@@ -18,9 +18,18 @@ public class CustomerControl {
 	 */
 	private CustomerContainer container;
 	
+	private CustomerControl instance = null;
+	
 	public CustomerControl()
 	{
 		readFile();
+	}
+	
+	public CustomerControl getInstance() {
+		if(instance == null)
+			instance = new CustomerControl();
+		
+		return instance;
 	}
 	
 	public void createCustomer(String name, int ID, customerGroup cgroup)

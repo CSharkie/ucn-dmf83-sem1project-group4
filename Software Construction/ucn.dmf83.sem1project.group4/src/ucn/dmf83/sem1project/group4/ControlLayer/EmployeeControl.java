@@ -18,7 +18,7 @@ public class EmployeeControl {
 	 */
 	private EmployeeContainer container;
 	private Employee employee;
-	private EmployeeControl instance;
+	private EmployeeControl instance = null;
 	
 	protected EmployeeControl()
 	{

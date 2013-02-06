@@ -14,7 +14,7 @@ public class OrderControl {
 	private OrderContainer container;
 	private Order order;
 	
-	private static OrderControl instance;
+	private static OrderControl instance = null;
 	
 	public OrderControl()
 	{
