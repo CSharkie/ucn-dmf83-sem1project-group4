@@ -5,7 +5,7 @@ import java.util.TreeMap;
 import java.util.Date;
 
 
-public class Product extends Item implements Serializable {
+public class Product extends Item implements Serializable, Comparable {
 	
 	/**
 	 * 
@@ -107,5 +107,11 @@ public class Product extends Item implements Serializable {
 		if(currentNumber <= minNumber ) {
 			//reorder
 		}
+	}
+
+	@Override
+	public int compareTo(Object arg0) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

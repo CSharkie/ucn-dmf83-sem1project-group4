@@ -15,6 +15,7 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.List;
+import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Canvas;
@@ -125,7 +126,7 @@ public class MainApp {
 	private DateTime dateOrder;
 	private TableColumn tblclmnName;
 	private TableColumn tblclmnPrice;
-	private TableColumn tblclmnNumber;
+	private TableColumn tblclmnAmount;
 	private TableColumn tblclmnTotal;
 	private Button btnAddProduct;
 	private Button btnDeleteProduct_1;
@@ -191,7 +192,10 @@ public class MainApp {
 		
 		
 		
-		OrderControl.getInstance().createOrder(0, new Customer(), new Employee(), new Date(), false);
+		
+		Order o = new Order(0, new Customer(), new Employee(), new Date(), false);
+		o.addProduct(LocationControl.getInstance().getProduct(0), 10);
+		OrderControl.getInstance().createOrder(o);
 		
 		
 		Display display = Display.getDefault();
@@ -266,18 +270,18 @@ public class MainApp {
 		
 		txtProductName = new Text(displayProduct, SWT.BORDER);
 		txtProductName.setEditable(false);
-		txtProductName.setBounds(81, 21, 319, 21);
+		txtProductName.setBounds(81, 45, 319, 21);
 		
 		txtProductID = new Text(displayProduct, SWT.BORDER);
 		txtProductID.setEditable(false);
-		txtProductID.setBounds(81, 45, 185, 21);
+		txtProductID.setBounds(81, 21, 185, 21);
 		
 		Label lblName = new Label(displayProduct, SWT.NONE);
-		lblName.setBounds(10, 24, 55, 15);
+		lblName.setBounds(10, 48, 55, 15);
 		lblName.setText("Name:");
 		
 		Label lblId = new Label(displayProduct, SWT.NONE);
-		lblId.setBounds(10, 48, 55, 15);
+		lblId.setBounds(10, 24, 55, 15);
 		lblId.setText("ID:");
 		
 		btnDeleteProduct = new Button(compositeProducts, SWT.NONE);
@@ -517,10 +521,10 @@ public class MainApp {
 		tblclmnPrice.setWidth(64);
 		tblclmnPrice.setText("Price");
 		
-		tblclmnNumber = new TableColumn(table, SWT.NONE);
-		tblclmnNumber.setResizable(false);
-		tblclmnNumber.setWidth(64);
-		tblclmnNumber.setText("Number");
+		tblclmnAmount = new TableColumn(table, SWT.NONE);
+		tblclmnAmount.setResizable(false);
+		tblclmnAmount.setWidth(64);
+		tblclmnAmount.setText("Amount");
 		
 		tblclmnTotal = new TableColumn(table, SWT.NONE);
 		tblclmnTotal.setResizable(false);
@@ -579,12 +583,15 @@ public class MainApp {
 		lblRenter.setBounds(10, 75, 65, 15);
 		  
 		txtRentsRenter = new Text(displayRents, SWT.BORDER);
+		txtRentsRenter.setEnabled(false);
 		txtRentsRenter.setBounds(106, 72, 294, 21);
 		  
 		txtRentsID = new Text(displayRents, SWT.BORDER);
+		txtRentsID.setEnabled(false);
 		txtRentsID.setBounds(106, 21, 294, 21);
 		  
 		txtRentsCustomerName = new Text(displayRents, SWT.BORDER);
+		txtRentsCustomerName.setEnabled(false);
 		txtRentsCustomerName.setBounds(106, 45, 294, 21);
 		  
 		Label lblID = new Label(displayRents, SWT.NONE);
@@ -600,6 +607,7 @@ public class MainApp {
 		lblDevice.setBounds(10, 100, 65, 15);
 		  
 		txtRentsDevice = new Text(displayRents, SWT.BORDER);
+		txtRentsDevice.setEnabled(false);
 		txtRentsDevice.setBounds(106, 96, 294, 21);
 		  
 		Label lblStartDate = new Label(displayRents, SWT.NONE);
@@ -607,9 +615,11 @@ public class MainApp {
 		lblStartDate.setBounds(10, 125, 65, 15);
 		
 		startDateRent = new DateTime(displayRents, SWT.BORDER);
+		startDateRent.setEnabled(false);
 		startDateRent.setBounds(106, 120, 80, 24);
 		
 		endDateRent = new DateTime(displayRents, SWT.BORDER);
+		endDateRent.setEnabled(false);
 		endDateRent.setBounds(320, 120, 80, 24);
 		
 		Label lblEndDate = new Label(displayRents, SWT.NONE);
@@ -653,12 +663,15 @@ public class MainApp {
 			lblDepartment.setBounds(10, 75, 65, 15);
 			
 			txtEmployeeDepartment = new Text(displayEmployee, SWT.BORDER);
+			txtEmployeeDepartment.setEnabled(false);
 			txtEmployeeDepartment.setBounds(81, 72, 319, 21);
 			
 			txtEmployeeName = new Text(displayEmployee, SWT.BORDER);
+			txtEmployeeName.setEnabled(false);
 			txtEmployeeName.setBounds(81, 48, 319, 21);
 			
 			txtEmployeeID = new Text(displayEmployee, SWT.BORDER);
+			txtEmployeeID.setEnabled(false);
 			txtEmployeeID.setBounds(81, 21, 185, 21);
 			
 			Label label_4 = new Label(displayEmployee, SWT.NONE);
@@ -716,21 +729,24 @@ public class MainApp {
 			displayLocation.setBounds(336, 10, 410, 450);
 			   
 			txtLocationAddress = new Text(displayLocation, SWT.BORDER);
+			txtLocationAddress.setEnabled(false);
 			txtLocationAddress.setBounds(81, 72, 319, 79);
 			   
 			txtLocationName = new Text(displayLocation, SWT.BORDER);
-			txtLocationName.setBounds(81, 21, 319, 21);
+			txtLocationName.setEnabled(false);
+			txtLocationName.setBounds(81, 45, 319, 21);
 			   
 			txtLocationID = new Text(displayLocation, SWT.BORDER);
-			txtLocationID.setBounds(81, 45, 185, 21);
+			txtLocationID.setEnabled(false);
+			txtLocationID.setBounds(81, 18, 185, 21);
 			   
 			Label txtName = new Label(displayLocation, SWT.NONE);
 			txtName.setText("Name:");
-			txtName.setBounds(10, 24, 55, 15);
+			txtName.setBounds(10, 48, 55, 15);
 			   
 			Label txtID = new Label(displayLocation, SWT.NONE);
 			txtID.setText("ID:");
-			txtID.setBounds(10, 48, 55, 15);
+			txtID.setBounds(10, 21, 55, 15);
 			   
 			Label lblAddress = new Label(displayLocation, SWT.NONE);
 			lblAddress.setText("Address:");
@@ -796,6 +812,15 @@ public class MainApp {
 	}
 	
 	public void showLocationDetails() {
+		int ID = findNextValidInteger(listLocation.getSelection()[0].toString());
+		
+		Location l = LocationControl.getInstance().getLocation(ID);
+		
+		txtLocationName.setText(l.getName() + "");
+		txtLocationAddress.setText(l.getAddress() + "");
+		txtLocationID.setText(l.getID() + "");
+		
+		
 		
 	}
 	
@@ -807,7 +832,22 @@ public class MainApp {
 	}
 	
 	public void showOrderDetails() {
+		int ID = findNextValidInteger(listOrders.getSelection()[0].toString());
 		
+		Order o = OrderControl.getInstance().getOrder(ID);
+		
+		txtOrderID.setText(o.getID() + "");
+		txtOrderCustomerName.setText(o.getCustomer().getName() + "");
+		txtOrderSeller.setText(o.getSeller().getName() + "");
+		
+		for(Product p:o.getProducts()) {
+			TableItem item = new TableItem(table,SWT.NONE);
+			item.setText(1, p.getName());
+			item.setText(2, p.getPrice(o.getOrderDate()) + "");
+			item.setText(3, o.getAmount(p) + "");
+			item.setText(4, ((p.getPrice(o.getOrderDate()))* o.getAmount(p) + ""));
+		}
+		table.setRedraw(true);
 	}
 	
 	public void searchOrders() {

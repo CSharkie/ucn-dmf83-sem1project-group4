@@ -30,13 +30,19 @@ public class OrderControl {
 	
 	public void createOrder(int iD, Customer customer, Employee seller, Date orderDate, boolean isPaid)
     {
-        container.addOrder(new Order(iD, customer, seller, orderDate, isPaid));
+		Order o = new Order(iD, customer, seller, orderDate, isPaid);
+        container.addOrder(o);
         saveFile();
     }
 	
-	public void getOrder(int ID)
+	public void createOrder(Order o) {
+		container.addOrder(o);
+		saveFile();
+	}
+	
+	public Order getOrder(int ID)
     {
-        this.order = container.getOrder(ID);
+        return container.getOrder(ID);
     }
 	
 	public ArrayList<Order> getOrders(Date startDate, Date endDate)

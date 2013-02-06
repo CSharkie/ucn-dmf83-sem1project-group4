@@ -2,7 +2,10 @@ package ucn.dmf83.sem1project.group4.DomainLayer;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 
@@ -18,7 +21,7 @@ public class Order implements Serializable {
 	private Employee seller;
 	private Date orderDate; // The exact time the order was made
 	
-	private TreeMap<Product,Integer> orderItems; // Key is the Product object, Value is the amount
+	private TreeMap orderItems; // Key is the Product object, Value is the amount
 	
 	private double orderPrice; // SubTotal price of all items added together
 	private int discount; // The amount of discount, in percentage (10, 20, etc)
@@ -40,6 +43,8 @@ public class Order implements Serializable {
 		this.seller = seller;
 		this.orderDate = orderDate;
 		this.isPaid = isPaid;
+		
+		orderItems = new TreeMap<Product,Integer>();
 	}
 	
 	/**
@@ -126,10 +131,11 @@ public class Order implements Serializable {
 		
 		order += "\n\n\n\n\n";
 		
-		for(Entry<Product,Integer> entry : orderItems.entrySet())
+		for(Iterator it = orderItems.entrySet().iterator(); it.hasNext();)
 		{
-			order += entry.getKey().getName() + "\t\t\t" + entry.getKey().getPrice(orderDate) + "\n";
-			order += "\t x" + entry.getValue() + "\t\t" + (entry.getKey().getPrice(orderDate) * entry.getValue()) + "\n";
+			Map.Entry entry = (Entry) it.next();
+			order += ((Product)entry.getKey()).getName() + "\t\t\t" + ((Product)entry.getKey()).getPrice(orderDate) + "\n";
+			order += "\t x" + (Product)entry.getValue() + "\t\t" + (((Product)entry.getKey()).getPrice(orderDate)) * (Integer)entry.getValue() + "\n";
 		}
 		
 		order += "\n\n";
@@ -145,8 +151,10 @@ public class Order implements Serializable {
 	public void setOrderPrice()
 	{
 		orderPrice = 0;
-		for(Entry<Product,Integer> entry : orderItems.entrySet())
-			orderPrice += (entry.getKey().getPrice(orderDate) * entry.getValue());
+		for(Iterator it = orderItems.entrySet().iterator();it.hasNext();) {
+			Map.Entry entry = (Entry) it.next();
+			orderPrice += ((Integer)((Product)entry.getKey()).getPrice(orderDate)) * (Integer)entry.getValue();
+		}
 	}
 	
 	public double getOrderPrice()
@@ -186,11 +194,13 @@ public class Order implements Serializable {
 	{
 		ArrayList<Product> products = new ArrayList<Product>();
 		
-		for(Entry<Product,Integer> entry : orderItems.entrySet())
-		{
-			products.add(entry.getKey());
+		if(!orderItems.isEmpty()) {
+			for(Iterator it = orderItems.keySet().iterator(); it.hasNext();)
+			{
+				Map.Entry entry = (Entry) it.next();
+				products.add((Product)entry.getKey());
+			}
 		}
-		
 		return products;
 	}
 	
@@ -202,7 +212,7 @@ public class Order implements Serializable {
 	
 	public void removeProduct(Product product)
 	{
-		product.buy(orderItems.get(product));
+		product.buy((Integer)orderItems.get(product));
 		orderItems.remove(product);
 	}
 	
@@ -215,7 +225,7 @@ public class Order implements Serializable {
 	
 	public void modifyAmount(Product product, Integer amount)
 	{
-		product.buy(orderItems.get(product));
+		product.buy((Integer)orderItems.get(product));
 		orderItems.put(product, amount);
 		product.sell(amount);
 	}
@@ -223,5 +233,9 @@ public class Order implements Serializable {
 	public Order getOrder()
 	{
 		return this;
+	}
+	
+	public int getAmount(Product product) {
+		return (Integer)orderItems.get(product);
 	}
 }
