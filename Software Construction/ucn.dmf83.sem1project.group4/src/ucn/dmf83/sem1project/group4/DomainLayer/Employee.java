@@ -3,12 +3,18 @@
  */
 package ucn.dmf83.sem1project.group4.DomainLayer;
 
+import java.io.Serializable;
+
 /**
  * @author József
  *
  */
-public class Employee extends User {
+public class Employee extends User implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5508260984606119628L;
 	private Location location;
 
 	public Employee(String name, int ID, Location location) {

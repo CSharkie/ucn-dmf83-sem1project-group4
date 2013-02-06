@@ -20,22 +20,26 @@ public class CustomerControl {
 	
 	public CustomerControl()
 	{
+		readFile();
 		container = CustomerContainer.getInstance();
 	}
 	
 	public void createCustomer(String name, int ID, customerGroup cgroup)
 	{
 		container.addCustomer(name, ID, cgroup);
+		saveFile();
 	}
 	
 	public void removeCustomer(int ID)
 	{
 		container.removeCustomer(ID);
+		saveFile();
 	}
 	
 	public void updateCustomer(Customer original, Customer newc)
 	{
 		container.updateCustomer(original, newc);
+		saveFile();
 	}
 	
 	public Customer getCustomer(int ID)

@@ -1,11 +1,16 @@
 package ucn.dmf83.sem1project.group4.DomainLayer;
 
+import java.io.Serializable;
 import java.util.TreeMap;
 import java.util.Date;
 
 
-public class Product extends Item{
+public class Product extends Item implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5371292275052913411L;
 	private TreeMap<Date, Integer> stockPrices;
 	private TreeMap<Date,Integer> salesPrices;
 	

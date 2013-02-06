@@ -13,6 +13,7 @@ public class OfferContainer implements Serializable {
 	private static OfferContainer instance = null;
 
 	protected OfferContainer() {
+		offers = new ArrayList<Offer>();
 	}
 
 	public static OfferContainer getInstance() {

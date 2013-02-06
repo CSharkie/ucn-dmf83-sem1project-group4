@@ -1,7 +1,14 @@
 package ucn.dmf83.sem1project.group4.DomainLayer;
 
-public class Item {
+import java.io.Serializable;
+
+public class Item implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7664286829132342396L;
+
 	private int ID;
 	
 	private String name;

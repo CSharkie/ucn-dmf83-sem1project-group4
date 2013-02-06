@@ -12,6 +12,7 @@ public class RentContainer implements Serializable {
 	private static RentContainer instance = null;
 
 	protected RentContainer() {
+		rents = new ArrayList<Rent>();
 	}
 
 	public static RentContainer getInstance() {

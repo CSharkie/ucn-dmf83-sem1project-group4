@@ -11,16 +11,27 @@ import ucn.dmf83.sem1project.group4.DomainLayer.*;
 
 public class ContractorControl {
 	
+	private ContractorControl instance = null;
 	private ContractorContainer contractor;
 	
-	public ContractorControl()
+	protected ContractorControl()
 	{
+		readFile();
 		contractor = ContractorContainer.getInstance();
+	}
+	
+	public ContractorControl getInstance() {
+		if(instance == null) {
+			instance = new ContractorControl();
+		}
+		
+		return instance;
 	}
 	
 	public void createContractor(int ID, String name)
 	{
 		contractor.addContractor(ID, name);
+		saveFile();
 	}
 	
 	public ArrayList<Contractor> getContractors(String name)

@@ -1,6 +1,13 @@
 package ucn.dmf83.sem1project.group4.DomainLayer;
 
-public class Contractor extends User {
+import java.io.Serializable;
+
+public class Contractor extends User implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5232952646258263573L;
 
 	public Contractor() {
 		super();

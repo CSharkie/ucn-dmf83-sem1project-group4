@@ -5,34 +5,39 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import ucn.dmf83.sem1project.group4.DomainLayer.CustomerContainer;
-import ucn.dmf83.sem1project.group4.DomainLayer.SystemUser;
-import ucn.dmf83.sem1project.group4.DomainLayer.SystemUserContainer;
+import ucn.dmf83.sem1project.group4.DomainLayer.*;
 
 public class SystemUserControl {
 	private SystemUserContainer container;
 	private SystemUser user;
 	
+	
 	public SystemUserControl() {
+		readFile();
 		container = SystemUserContainer.getInstance();
 	}
 	
+
+	
 	public void addSystemUser(String username, String password) {
 		container.addSystemUser(username,password);
+		saveFile();
 	}
 	
 	public void getSystemUser(String username) {
 		user = container.getSystemUser(username);
 	}
 	
-	public void removeSystemUser() {
+	public void removeSystemUser(String username) {
+		getSystemUser(username);
 		container.removeSystemUser(user);
+		saveFile();
 	}
 	
 	public void updateSystemUser(String username, String password) {
-		getSystemUser(username);
-		removeSystemUser();
+		removeSystemUser(username);
 		addSystemUser(username,password);
+		saveFile();
 	}
 	
 	public void updateSystemUserRights(boolean isManager, boolean isAdmin) {
@@ -40,15 +45,12 @@ public class SystemUserControl {
 		user.setElevated(isManager);
 		user.setAdmin(isAdmin);
 		container.addSystemUser(user);
+		saveFile();
 	}
 	
 	public SystemUser authSystemUser(String username, String password) {
 		SystemUser tempuser = container.authenticate(username, password);
 		return tempuser;
-	}
-	
-	public void flush() {
-		container.flush();
 	}
 	
 	public SystemUser getSystemUser() {

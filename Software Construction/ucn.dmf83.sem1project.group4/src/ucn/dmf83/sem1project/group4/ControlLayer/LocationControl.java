@@ -17,6 +17,7 @@ public class LocationControl {
 	
 	protected LocationControl()
 	{
+		readFile();
 		container = LocationContainer.getInstance();
 		
 	}
@@ -29,11 +30,11 @@ public class LocationControl {
 		return instance;
 	}
 	
-	public Location createLocation(int ID, String address)
+	public void createLocation(int ID, String address)
 	{
-		location = new Location(ID, address);
-		container.addLocation(location);
-		return location;
+		container.addLocation(new Location(ID, address));
+		System.out.println("LocationDB - added new location " + ID + "; " + address);
+		saveFile();
 	}
 	
 	public Location getLocation(int ID)
@@ -54,6 +55,7 @@ public class LocationControl {
 	public void removeLocation(Location location)
 	{
 		container.removeLocation(location);
+		saveFile();
 	}
 	
 	public void readFile()
@@ -102,5 +104,14 @@ public class LocationControl {
 	public Product getProduct(int ID) {
 		return this.container.getProduct(ID);
 	}
+	
+	public ArrayList<Location> getLocations() {
+		return this.container.getLocations();
+	}
+	
+	public ArrayList<Location> searchLocations(String filter) {
+		return this.container.searchLocations(filter);
+	}
+	
 
 }

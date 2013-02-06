@@ -20,17 +20,20 @@ public class EmployeeControl {
 	
 	public EmployeeControl()
 	{
+		readFile();
 		container = EmployeeContainer.getInstance();
 	}
 	
 	public void createEmployee(String name, Location location )
 	{
 		container.createEmployee(name,location);
+		saveFile();
 	}
 	
 	public void removeEmployee(int ID)
 	{
 		container.removeEmloyee(ID);
+		saveFile();
 	}
 	
 	public Employee getEmployee(int ID) {
@@ -40,6 +43,7 @@ public class EmployeeControl {
 	public void updateEmployeeLocation(Location location)
 	{
 		employee.setLocation(location);
+		saveFile();
 	}
 	
 	public void readFile()

@@ -17,6 +17,7 @@ public class RentControl {
 	
 	public RentControl()
 	{
+		readFile();
 		container = RentContainer.getInstance();
 	}
 	
@@ -28,11 +29,10 @@ public class RentControl {
 		return instance;
 	}
 	
-	public Rent createRent(int ID, Customer customer, Employee renter, Device device, Date startDate, int length)
+	public void createRent(int ID, Customer customer, Employee renter, Device device, Date startDate, int length)
 	{
-		rent = new Rent(ID, customer, renter, device, startDate, length);
-		container.addRent(rent);
-		return rent;
+		container.addRent(new Rent(ID, customer, renter, device, startDate, length));
+		saveFile();
 	}
 	
 	public void getRent(int ID)
@@ -40,15 +40,18 @@ public class RentControl {
 		this.rent = container.getRent(ID);
 	}
 	
-	public void removeRent()
+	public void removeRent(int ID)
 	{
+		getRent(ID);
 		container.removeRent(this.rent);
+		saveFile();
 	}
 	
 	public void updateRent(Rent rent) {
 		container.removeRent(this.rent);
 		this.rent = rent;
 		container.addRent(this.rent);
+		saveFile();
 	}
 	
 	public void readFile()

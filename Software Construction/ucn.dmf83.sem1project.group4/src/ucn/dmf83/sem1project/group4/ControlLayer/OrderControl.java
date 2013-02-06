@@ -18,6 +18,7 @@ public class OrderControl {
 	
 	public OrderControl()
 	{
+		readFile();
 		container = OrderContainer.getInstance();
 	}
 	
@@ -28,11 +29,10 @@ public class OrderControl {
 		return instance;
 	}
 	
-	public Order createOrder(int iD, Customer customer, Employee seller, Date orderDate, boolean isPaid)
+	public void createOrder(int iD, Customer customer, Employee seller, Date orderDate, boolean isPaid)
     {
-        order = new Order(iD, customer, seller, orderDate, isPaid);
-        container.addOrder(order);
-        return order;
+        container.addOrder(new Order(iD, customer, seller, orderDate, isPaid));
+        saveFile();
     }
 	
 	public void getOrder(int ID)
@@ -63,6 +63,7 @@ public class OrderControl {
 	public void removeOrder(Order order)
 	{
 		container.removeOrder(order);
+		saveFile();
 	}
 	
 	public void readFile()

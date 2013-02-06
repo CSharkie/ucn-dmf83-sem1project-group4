@@ -1,9 +1,15 @@
 package ucn.dmf83.sem1project.group4.DomainLayer;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Location {
+public class Location implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -234724921268824743L;
+
 	private int ID;
 	
 	private String name;

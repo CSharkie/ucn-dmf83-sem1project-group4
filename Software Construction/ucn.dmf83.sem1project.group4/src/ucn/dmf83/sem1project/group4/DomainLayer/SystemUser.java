@@ -1,6 +1,12 @@
 package ucn.dmf83.sem1project.group4.DomainLayer;
 
-public class SystemUser {
+import java.io.Serializable;
+
+public class SystemUser implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7878577359537440509L;
 	private String strUserName;
 	private String strPassword;
 	

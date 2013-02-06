@@ -1,11 +1,17 @@
 package ucn.dmf83.sem1project.group4.DomainLayer;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 
-public class Order {
+public class Order implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6523321720362818818L;
+
 	private int ID;
 	
 	private Customer customer;

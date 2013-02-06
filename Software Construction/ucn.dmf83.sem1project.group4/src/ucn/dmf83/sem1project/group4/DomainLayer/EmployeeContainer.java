@@ -13,7 +13,7 @@ public class EmployeeContainer implements Serializable {
 	private static EmployeeContainer instance = null;
 
 	protected EmployeeContainer() {
-		
+		employees = new ArrayList<Employee>();
 	}
 
 	public static EmployeeContainer getInstance() {

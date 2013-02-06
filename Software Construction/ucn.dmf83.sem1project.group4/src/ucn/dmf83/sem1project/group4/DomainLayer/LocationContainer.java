@@ -13,6 +13,7 @@ public class LocationContainer implements Serializable {
 	private static LocationContainer instance = null;
 
 	protected LocationContainer() {
+		locations = new ArrayList<Location>();
 	}
 
 	public static LocationContainer getInstance() {
@@ -72,16 +73,7 @@ public class LocationContainer implements Serializable {
 	}
 	
 	public ArrayList<Product> getProducts(String location) {
-		ArrayList<Product> list = new ArrayList<Product>();
-		
-		Location temp = getLocation(location);
-		
-		for(Product p:temp.getProducts()) {
-			list.add(p);
-		}
-		
-		
-		return list;
+			return getLocation(location).getProducts();
 	}
 	
 	public ArrayList<Product> getProducts() {
@@ -117,9 +109,12 @@ public class LocationContainer implements Serializable {
 		
 		for(Location l:locations) {
 			for(Product p:l.getProducts()) {
-				if(filter != "")
+				if(filter != "") {
 					if(p.getName().toString().contains(filter) || Integer.toString(p.getID()).contains(filter))
 						list.add(p);
+				} else {
+					list.add(p);
+				}
 			}
 		}
 		
@@ -135,6 +130,24 @@ public class LocationContainer implements Serializable {
 				pa = l.getProduct(ID);
 		}
 		return pa;
+	}
+	
+	
+	
+	public ArrayList<Location> searchLocations(String filter) {
+		ArrayList<Location> list = new ArrayList<Location>();
+
+		
+		for(Location l:locations) {
+				if(filter != "") {
+					if(("" + l.getName()).toString().contains(filter) || (""+l.getAddress()).toString().contains(filter))
+						list.add(l);
+				} else {
+					list.add(l);
+				}
+		}
+		
+		return list;
 	}
 
 }

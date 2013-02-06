@@ -13,7 +13,8 @@ public class CustomerContainer implements Serializable {
 	private static CustomerContainer instance = null;
 	
 	protected CustomerContainer(){
-		
+		customers = new ArrayList<Customer>();
+		customerGroups = new ArrayList<customerGroup>();
 	}
 	
 	public static CustomerContainer getInstance()

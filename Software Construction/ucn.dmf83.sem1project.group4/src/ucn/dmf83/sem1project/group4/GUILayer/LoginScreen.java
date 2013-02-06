@@ -14,14 +14,14 @@ import ucn.dmf83.sem1project.group4.ControlLayer.SingleUserControl;
 import ucn.dmf83.sem1project.group4.ControlLayer.SystemUserControl;
 
 public class LoginScreen {
-
-	private static SystemUserControl SUcontrol;
-	private static SingleUserControl Ucontrol;
+	
+	private SystemUserControl SUcontrol;
 	
 	
 	protected Shell shell;
 	private Text txtUName;
 	private Text txtPassword;
+	private Label labelFinal;
 
 	/**
 	 * Launch the application.
@@ -29,13 +29,6 @@ public class LoginScreen {
 	 */
 	public static void main(String[] args) {
 		
-		SUcontrol = new SystemUserControl();
-		Ucontrol = SingleUserControl.getInstance();
-		
-		SUcontrol.flush();
-		SUcontrol.addSystemUser("test", "test");
-		SUcontrol.getSystemUser("test");
-		Ucontrol.setUser(null);
 		
 		try {
 			LoginScreen window = new LoginScreen();
@@ -49,6 +42,7 @@ public class LoginScreen {
 	 * Open the window.
 	 */
 	public void open() {
+		SUcontrol = new SystemUserControl();
 		Display display = Display.getDefault();
 		createContents();
 		shell.open();
@@ -88,27 +82,14 @@ public class LoginScreen {
 		lblPassword.setBounds(232, 195, 55, 15);
 		lblPassword.setText("Password:");
 		
-		final Label labelFinal = new Label(shell, SWT.NONE);
+		labelFinal = new Label(shell, SWT.NONE);
 		labelFinal.setBounds(329, 122, 200, 15);
 		
 		Button btnLogin = new Button(shell, SWT.NONE);
 		btnLogin.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				String uname = txtUName.getText();
-				String password = txtPassword.getText();
-				
-				Ucontrol.setUser(SUcontrol.authSystemUser(uname, password));
-				
-				if(Ucontrol.getUser() != null) {
-					shell.setVisible(false);
-					shell.close();
-					MainApp.main(null);
-					shell.dispose();
-				}
-				else {
-					labelFinal.setText("Login failed!");
-				}
+				authUser();
 			}
 		});
 		btnLogin.setBounds(232, 239, 91, 50);
@@ -139,7 +120,7 @@ public class LoginScreen {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				SUcontrol.updateSystemUserRights(btnElevatedRights.getSelection(), btnAdminMode.getSelection());
-				Ucontrol.setUser(SUcontrol.getSystemUser());
+				SingleUserControl.getInstance().setUser(SUcontrol.getSystemUser());
 			}
 		});
 
@@ -147,9 +128,27 @@ public class LoginScreen {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				SUcontrol.updateSystemUserRights(btnElevatedRights.getSelection(), btnAdminMode.getSelection());
-				Ucontrol.setUser(SUcontrol.getSystemUser());
+				SingleUserControl.getInstance().setUser(SUcontrol.getSystemUser());
 			}
 		});
 
+	}
+	
+	
+	public void authUser() {
+		String uname = txtUName.getText();
+		String password = txtPassword.getText();
+		
+		SingleUserControl.getInstance().setUser(SUcontrol.authSystemUser(uname, password));
+		
+		if(SingleUserControl.getInstance().getUser() != null) {
+			shell.setVisible(false);
+			shell.close();
+			MainApp.main(null);
+			shell.dispose();
+		}
+		else {
+			labelFinal.setText("Login failed!");
+		}
 	}
 }

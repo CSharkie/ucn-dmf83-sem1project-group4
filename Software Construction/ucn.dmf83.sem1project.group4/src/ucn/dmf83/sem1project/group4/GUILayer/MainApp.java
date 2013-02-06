@@ -1,5 +1,6 @@
 package ucn.dmf83.sem1project.group4.GUILayer;
 
+import java.io.File;
 
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
@@ -7,8 +8,10 @@ import org.eclipse.swt.widgets.Shell;
 import ucn.dmf83.sem1project.group4.ControlLayer.*;
 import ucn.dmf83.sem1project.group4.DomainLayer.*;
 
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Decorations;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Composite;
@@ -23,6 +26,15 @@ import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.DateTime;
+import org.eclipse.swt.widgets.Combo;
+import org.eclipse.swt.widgets.Spinner;
+import org.eclipse.wb.swt.SWTResourceManager;
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableColumn;
+
+import com.google.zxing.*;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
 
 public class MainApp {
 	
@@ -39,36 +51,66 @@ public class MainApp {
 	private Text txtProductDescription;
 	private Text txtProductDepot;
 	
+	private Button btnEdit;
+	private Button btnDeleteProduct;
+	private Button btnAddNewProduct;
+	private Button btnReloadProduct;
+	
 	private List listProduct;
 	private Group displayProduct;
 	private Canvas barcodeProduct;
 	
+	
+	// Customer screen
+	private TabItem tbtmCustomers;
+	
 	private Text searchCustomer;
-	private Text txtCustomerGroupName;
 	private Text txtCustomerName;
 	private Text txtCustomerID;
 	
+	private Composite compositeCustomers;
+	private List listCustomers;
+	private Group displayCustomer;
+	private Button btnReloadCustomer;
+	private Button btnSaveCustomer;
+	private Button btnDeleteCustomer;
+	private Button btnAddNewCustomer;
+	
+	
+	// Employee screen
 	private Text searchEmployee;
 	private Text txtEmployeeDepartment;
 	private Text txtEmployeeName;
 	private Text txtEmployeeID;
 	
+	
+	// Location screen
 	private Text searchLocation;
 	private Text txtLocationAddress;
 	private Text txtLocationName;
 	private Text txtLocationID;
 	
+	
+	// Order screen
 	private Text searchOrder;
 	private Text txtOrderSeller;
 	private Text txtOrderID;
 	private Text txtOrderCustomerName;
 	
+	
+	// Rent screen
 	private Text searchRents;
 	private Text txtRentsRenter;
 	private Text txtRentsLength;
 	private Text txtRentsID;
 	private Text txtRentsCustomerName;
 	private Text txtRentsDevice;
+	private Table table;
+	private List listLocation;
+	private Button btnReloadLocation;
+	private Button btnDeleteLocation;
+	private Button btnSaveLocation;
+	private Button btnAddNewLocation;
 	
 
 	/**
@@ -89,6 +131,16 @@ public class MainApp {
 	 * Open the window.
 	 */
 	public void open() {
+		
+		LocationControl.getInstance().createLocation(0, "Test Road 1, 0000 Beta Town");
+		LocationControl.getInstance().getLocation(0).addProduct(new Product(0,"Test Lumber","Test Lumber, only for testers!"));
+		LocationControl.getInstance().getLocation(0).addProduct(new Product(1,"Test Lumber","Test Lumber, only for testers!"));
+		LocationControl.getInstance().getLocation(0).addProduct(new Product(2,"Test Lumber","Test Lumber, only for testers!"));
+		LocationControl.getInstance().getLocation(0).addProduct(new Product(3,"Test Lumber","Test Lumber, only for testers!"));
+		LocationControl.getInstance().getLocation(0).addProduct(new Product(4,"Test Lumber","Test Lumber, only for testers!"));
+		LocationControl.getInstance().getLocation(0).addProduct(new Product(5,"Test Lumber","Test Lumber, only for testers!"));
+		
+		
 		Display display = Display.getDefault();
 		createContents();
 	    int x = display.getPrimaryMonitor().getBounds().x + (display.getPrimaryMonitor().getBounds().width - shell.getBounds().width) / 2;
@@ -125,31 +177,13 @@ public class MainApp {
 		listProduct = new List(compositeProducts, SWT.BORDER);
 		listProduct.addSelectionListener(new SelectionAdapter() {
 			@Override
-			public void widgetSelected(SelectionEvent e) {
-				if(!(listProduct.getSelectionCount() > 1)) {
-					Product p = LocationControl.getInstance().getProduct(Integer.parseInt(listProduct.getSelection()[0].substring(0, 9)));
-					
-					displayProduct.setText(p.getID() + " - " + p.getName());
-					
-					txtProductName.setText(p.getName());
-					txtProductID.setText(p.getID() + "");
-					txtProductDescription.setText(p.getDescription());
-					txtProductDescription.setText(LocationContainer.getInstance().getLocation(p).getName());
-				}
-			}
+			public void widgetSelected(SelectionEvent e) { showProductDetails();}
 		});
 		listProduct.setBounds(10, 37, 320, 466);
 		
 		searchProduct = new Text(compositeProducts, SWT.BORDER);
-		searchProduct.addModifyListener(new ModifyListener() {
-			public void modifyText(ModifyEvent arg0) {
-				listProduct.removeAll();
-				for(Product p:LocationControl.getInstance().searchProducts(searchProduct.getText())) {
-					listProduct.add(p.getID() + "\t" + p.getName());
-				}
-			}
-		});
-		searchProduct.setBounds(10, 10, 320, 21);
+		searchProduct.addModifyListener( new ModifyListener() { public void modifyText(ModifyEvent arg0) {searchProducts();} } );
+		searchProduct.setBounds(10, 10, 299, 21);
 		
 		displayProduct = new Group(compositeProducts, SWT.NONE);
 		displayProduct.setBounds(336, 10, 410, 450);
@@ -162,6 +196,7 @@ public class MainApp {
 		lblDescription.setText("Description:");
 		
 		txtProductDescription = new Text(displayProduct, SWT.BORDER);
+		txtProductDescription.setEditable(false);
 		txtProductDescription.setBounds(81, 72, 319, 79);
 		
 		Label lblDepotLocation = new Label(displayProduct, SWT.NONE);
@@ -169,6 +204,7 @@ public class MainApp {
 		lblDepotLocation.setText("Depot:");
 		
 		txtProductDepot = new Text(displayProduct, SWT.BORDER);
+		txtProductDepot.setEditable(false);
 		txtProductDepot.setBounds(81, 157, 319, 21);
 		
 		Group grpProductLocation = new Group(displayProduct, SWT.NONE);
@@ -176,9 +212,11 @@ public class MainApp {
 		grpProductLocation.setBounds(272, 184, 128, 256);
 		
 		txtProductName = new Text(displayProduct, SWT.BORDER);
+		txtProductName.setEditable(false);
 		txtProductName.setBounds(81, 21, 319, 21);
 		
 		txtProductID = new Text(displayProduct, SWT.BORDER);
+		txtProductID.setEditable(false);
 		txtProductID.setBounds(81, 45, 185, 21);
 		
 		Label lblName = new Label(displayProduct, SWT.NONE);
@@ -189,81 +227,125 @@ public class MainApp {
 		lblId.setBounds(10, 48, 55, 15);
 		lblId.setText("ID:");
 		
-		Button btnDeleteProduct = new Button(compositeProducts, SWT.NONE);
-		btnDeleteProduct.setBounds(434, 466, 100, 37);
+		btnDeleteProduct = new Button(compositeProducts, SWT.NONE);
+		btnDeleteProduct.setEnabled(false);
+		btnDeleteProduct.setFont(SWTResourceManager.getFont("Calibri", 12, SWT.NORMAL));
+		btnDeleteProduct.setBounds(346, 466, 82, 37);
 		btnDeleteProduct.setText("DELETE");
 		
-		Button btnSaveProduct = new Button(compositeProducts, SWT.NONE);
-		btnSaveProduct.setBounds(540, 466, 100, 37);
-		btnSaveProduct.setText("SAVE");
-		
-		Button btnAddNewProduct = new Button(compositeProducts, SWT.NONE);
-		btnAddNewProduct.setBounds(646, 466, 100, 37);
-		btnAddNewProduct.setText("ADD AS NEW");
-		
-		Button btnReloadProduct = new Button(compositeProducts, SWT.NONE);
-		btnReloadProduct.addSelectionListener(new SelectionAdapter() {
+		btnEdit = new Button(compositeProducts, SWT.NONE);
+		btnEdit.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				listProduct.removeAll();
-				searchProduct.setText("");
-				for(Product p:LocationControl.getInstance().searchProducts(searchProduct.getText())) {
-					listProduct.add(p.getID() + "\t" + p.getName());
-				}
 			}
 		});
-		btnReloadProduct.setText("RELOAD LIST");
-		btnReloadProduct.setBounds(336, 466, 92, 37);
+		btnEdit.setBounds(540, 466, 100, 37);
+		btnEdit.setText("EDIT");
 		
-		TabItem tbtmCustomers = new TabItem(tabFolder, SWT.NONE);
+		btnAddNewProduct = new Button(compositeProducts, SWT.NONE);
+		btnAddNewProduct.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+			}
+		});
+		btnAddNewProduct.setBounds(646, 466, 100, 37);
+		btnAddNewProduct.setText("ADD NEW");
+		
+		btnReloadProduct = new Button(compositeProducts, SWT.NONE);
+		btnReloadProduct.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
+		btnReloadProduct.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {searchProduct.setText(""); searchProducts();}
+		});
+		btnReloadProduct.setText("R");
+		btnReloadProduct.setBounds(309, 10, 21, 21);
+		
+		Button buttonSave = new Button(compositeProducts, SWT.NONE);
+		buttonSave.setEnabled(false);
+		buttonSave.setText("SAVE");
+		buttonSave.setBounds(434, 466, 100, 37);
+		
+		tbtmCustomers = new TabItem(tabFolder, SWT.NONE);
 		tbtmCustomers.setText("Customers");
 		
-		Composite compositeCustomers = new Composite(tabFolder, SWT.NONE);
+		
+		compositeCustomers = new Composite(tabFolder, SWT.NONE);
 		tbtmCustomers.setControl(compositeCustomers);
 		
 		searchCustomer = new Text(compositeCustomers, SWT.BORDER);
 		searchCustomer.setBounds(10, 10, 320, 21);
 		
-		List listCustomers = new List(compositeCustomers, SWT.BORDER);
+		listCustomers = new List(compositeCustomers, SWT.BORDER);
 		listCustomers.setBounds(10, 37, 320, 466);
 		
-		Group displayCustomer = new Group(compositeCustomers, SWT.NONE);
+		displayCustomer = new Group(compositeCustomers, SWT.NONE);
 		displayCustomer.setBounds(336, 10, 410, 450);
 		
-		Label label = new Label(displayCustomer, SWT.NONE);
-		label.setText("Description:");
-		label.setBounds(10, 75, 65, 15);
-		
-		txtCustomerGroupName = new Text(displayCustomer, SWT.BORDER);
-		txtCustomerGroupName.setBounds(81, 72, 319, 21);
-		
 		txtCustomerName = new Text(displayCustomer, SWT.BORDER);
-		txtCustomerName.setBounds(81, 21, 319, 21);
+		txtCustomerName.setEnabled(false);
+		txtCustomerName.setBounds(144, 50, 256, 21);
 		
 		txtCustomerID = new Text(displayCustomer, SWT.BORDER);
-		txtCustomerID.setBounds(81, 45, 185, 21);
+		txtCustomerID.setEnabled(false);
+		txtCustomerID.setBounds(144, 23, 256, 21);
 		
 		Label label_2 = new Label(displayCustomer, SWT.NONE);
 		label_2.setText("Name:");
-		label_2.setBounds(10, 24, 55, 15);
+		label_2.setBounds(10, 53, 55, 15);
 		
 		Label label_3 = new Label(displayCustomer, SWT.NONE);
 		label_3.setText("ID:");
-		label_3.setBounds(10, 48, 55, 15);
+		label_3.setBounds(10, 26, 55, 15);
 		
-		Button btnReloadCustomer = new Button(compositeCustomers, SWT.NONE);
+		Group grpAddress = new Group(displayCustomer, SWT.NONE);
+		grpAddress.setText("Address");
+		grpAddress.setBounds(10, 134, 390, 128);
+		
+		Combo combo = new Combo(displayCustomer, SWT.NONE);
+		combo.setEnabled(false);
+		combo.setBounds(144, 77, 256, 23);
+		
+		Label lblGroup = new Label(displayCustomer, SWT.NONE);
+		lblGroup.setBounds(10, 80, 55, 15);
+		lblGroup.setText("Group:");
+		
+		Spinner spinner = new Spinner(displayCustomer, SWT.BORDER);
+		spinner.setEnabled(false);
+		spinner.setBounds(144, 106, 64, 22);
+		
+		Label lblPersonalDiscount = new Label(displayCustomer, SWT.NONE);
+		lblPersonalDiscount.setBounds(10, 109, 108, 15);
+		lblPersonalDiscount.setText("Personal discount:");
+		
+		Label lblDiscountTotal = new Label(displayCustomer, SWT.NONE);
+		lblDiscountTotal.setBounds(230, 109, 89, 15);
+		lblDiscountTotal.setText("Discount total:");
+		
+		Spinner spinner_1 = new Spinner(displayCustomer, SWT.BORDER);
+		spinner_1.setEnabled(false);
+		spinner_1.setBounds(336, 106, 64, 22);
+		
+		Group grpContactDetails = new Group(displayCustomer, SWT.NONE);
+		grpContactDetails.setText("Contact details");
+		grpContactDetails.setBounds(10, 268, 390, 128);
+		
+		Button btnOrders = new Button(displayCustomer, SWT.NONE);
+		btnOrders.setBounds(292, 402, 108, 38);
+		btnOrders.setText("ORDERS");
+		
+		btnReloadCustomer = new Button(compositeCustomers, SWT.NONE);
 		btnReloadCustomer.setText("RELOAD LIST");
 		btnReloadCustomer.setBounds(336, 466, 92, 37);
 		
-		Button btnAddNewCustomer = new Button(compositeCustomers, SWT.NONE);
-		btnAddNewCustomer.setText("ADD AS NEW");
+		btnAddNewCustomer = new Button(compositeCustomers, SWT.NONE);
+		btnAddNewCustomer.setText("ADD NEW");
 		btnAddNewCustomer.setBounds(646, 466, 100, 37);
 		
-		Button btnDeleteCustomer = new Button(compositeCustomers, SWT.NONE);
+		btnDeleteCustomer = new Button(compositeCustomers, SWT.NONE);
 		btnDeleteCustomer.setText("DELETE");
 		btnDeleteCustomer.setBounds(434, 466, 100, 37);
 		
-		Button btnSaveCustomer = new Button(compositeCustomers, SWT.NONE);
+		btnSaveCustomer = new Button(compositeCustomers, SWT.NONE);
 		btnSaveCustomer.setText("SAVE");
 		btnSaveCustomer.setBounds(540, 466, 100, 37);
 		
@@ -308,30 +390,51 @@ public class MainApp {
 		lblDate.setBounds(10, 104, 65, 15);
 		
 		DateTime dateOrder = new DateTime(displayOrder, SWT.BORDER);
-		dateOrder.setBounds(111, 99, 80, 24);
+		dateOrder.setBounds(111, 99, 128, 24);
 		
 		Label lblPaid = new Label(displayOrder, SWT.NONE);
 		lblPaid.setText("Paid:");
-		lblPaid.setBounds(10, 134, 65, 15);
+		lblPaid.setBounds(248, 103, 65, 15);
 		
 		Button btnCheckButton = new Button(displayOrder, SWT.CHECK);
-		btnCheckButton.setBounds(111, 134, 93, 16);
+		btnCheckButton.setBounds(349, 103, 23, 16);
 		
-		Button btnReloadOrder = new Button(compositeOrders, SWT.NONE);
-		btnReloadOrder.setText("RELOAD LIST");
-		btnReloadOrder.setBounds(336, 466, 92, 37);
+		table = new Table(displayOrder, SWT.BORDER | SWT.FULL_SELECTION);
+		table.setBounds(10, 125, 390, 284);
+		table.setHeaderVisible(true);
+		table.setLinesVisible(true);
 		
-		Button btnDeleteOrder = new Button(compositeOrders, SWT.NONE);
-		btnDeleteOrder.setText("DELETE");
-		btnDeleteOrder.setBounds(434, 466, 100, 37);
+		TableColumn tblclmnName = new TableColumn(table, SWT.NONE);
+		tblclmnName.setResizable(false);
+		tblclmnName.setWidth(194);
+		tblclmnName.setText("Name");
 		
-		Button btnSaveOrder = new Button(compositeOrders, SWT.NONE);
-		btnSaveOrder.setText("SAVE");
-		btnSaveOrder.setBounds(540, 466, 100, 37);
+		TableColumn tblclmnPrice = new TableColumn(table, SWT.NONE);
+		tblclmnPrice.setResizable(false);
+		tblclmnPrice.setWidth(64);
+		tblclmnPrice.setText("Price");
 		
-		Button btnAddNewOrder = new Button(compositeOrders, SWT.NONE);
-		btnAddNewOrder.setText("ADD AS NEW");
-		btnAddNewOrder.setBounds(646, 466, 100, 37);
+		TableColumn tblclmnNumber = new TableColumn(table, SWT.NONE);
+		tblclmnNumber.setResizable(false);
+		tblclmnNumber.setWidth(64);
+		tblclmnNumber.setText("Number");
+		
+		TableColumn tblclmnTotal = new TableColumn(table, SWT.NONE);
+		tblclmnTotal.setResizable(false);
+		tblclmnTotal.setWidth(64);
+		tblclmnTotal.setText("Total");
+		
+		Button btnAddProduct = new Button(displayOrder, SWT.NONE);
+		btnAddProduct.setBounds(310, 415, 90, 25);
+		btnAddProduct.setText("Add product");
+		
+		Button btnDeleteProduct_1 = new Button(displayOrder, SWT.NONE);
+		btnDeleteProduct_1.setBounds(214, 415, 90, 25);
+		btnDeleteProduct_1.setText("Delete product");
+		
+		Label lblTotalPrice = new Label(displayOrder, SWT.NONE);
+		lblTotalPrice.setBounds(10, 420, 198, 15);
+		lblTotalPrice.setText("Total price:");
 		
 		TabItem tbtmRents = new TabItem(tabFolder, SWT.NONE);
 		tbtmRents.setText("Rents");
@@ -472,9 +575,14 @@ public class MainApp {
 			tbtmLocations.setControl(compositeLocations);
 			   
 			searchLocation = new Text(compositeLocations, SWT.BORDER);
-			searchLocation.setBounds(10, 10, 320, 21);
+			searchLocation.addModifyListener(new ModifyListener() {
+				public void modifyText(ModifyEvent arg0) {
+					searchLocations();
+				}
+			});
+			searchLocation.setBounds(10, 10, 299, 21);
 			   
-			List listLocation = new List(compositeLocations, SWT.BORDER);
+			listLocation = new List(compositeLocations, SWT.BORDER);
 			listLocation.setBounds(10, 37, 320, 466);
 			   
 			Group displayLocation = new Group(compositeLocations, SWT.NONE);
@@ -501,19 +609,26 @@ public class MainApp {
 			lblAddress.setText("Address:");
 			lblAddress.setBounds(10, 75, 65, 15);
 			   
-			Button btnReloadLocation = new Button(compositeLocations, SWT.NONE);
-			btnReloadLocation.setText("RELOAD LIST");
-			btnReloadLocation.setBounds(336, 466, 92, 37);
+			btnReloadLocation = new Button(compositeLocations, SWT.NONE);
+			btnReloadLocation.addSelectionListener(new SelectionAdapter() {
+				@Override
+				public void widgetSelected(SelectionEvent e) {
+					searchLocation.setText("");
+					searchLocations();
+				}
+			});
+			btnReloadLocation.setText("R");
+			btnReloadLocation.setBounds(309, 10, 21, 21);
 			   
-			Button btnDeleteLocation = new Button(compositeLocations, SWT.NONE);
+			btnDeleteLocation = new Button(compositeLocations, SWT.NONE);
 			btnDeleteLocation.setText("DELETE");
 			btnDeleteLocation.setBounds(434, 466, 100, 37);
 			   
-			Button btnSaveLocation = new Button(compositeLocations, SWT.NONE);
+			btnSaveLocation = new Button(compositeLocations, SWT.NONE);
 			btnSaveLocation.setText("SAVE");
 			btnSaveLocation.setBounds(540, 466, 100, 37);
 			   
-			Button btnAddNewLocation = new Button(compositeLocations, SWT.NONE);
+			btnAddNewLocation = new Button(compositeLocations, SWT.NONE);
 			btnAddNewLocation.setText("ADD AS NEW");
 			btnAddNewLocation.setBounds(646, 466, 100, 37);
 		//}
@@ -527,5 +642,100 @@ public class MainApp {
 			Composite composite_1 = new Composite(tabFolder, SWT.NONE);
 			tbtmCurrentUser.setControl(composite_1);
 		//}
+	}
+	
+	
+	// Product screen functions
+	public void showProductDetails() {
+		System.out.println("MainApp - Product - List item selected: " + listProduct.getSelection()[0]);
+		int ID = findNextValidInteger(listProduct.getSelection()[0]);
+		System.out.println("MainApp - Product - Selected item ID: " + ID);
+		Product p = LocationControl.getInstance().getProduct(ID);
+		
+		displayProduct.setText(p.getID() + " - " + p.getName());
+		
+		txtProductName.setText(p.getName() + "");
+		txtProductID.setText(p.getID() + "");
+		txtProductDescription.setText(p.getDescription() + "");
+		txtProductDepot.setText(LocationContainer.getInstance().getLocation(p).getName() + LocationContainer.getInstance().getLocation(p).getAddress());
+	}
+	
+	public void searchProducts() {
+		listProduct.removeAll();
+		for(Product p:LocationControl.getInstance().searchProducts(searchProduct.getText())) {
+			listProduct.add(p.getID() + "    " + p.getName());
+		}
+
+	}
+	
+	public void showLocationDetails() {
+		
+	}
+	
+	public void searchLocations() {
+		listLocation.removeAll();
+		for(Location l:LocationControl.getInstance().searchLocations(searchLocation.getText())) {
+			listLocation.add(l.getID() + "    " + l.getName() + " " + l.getAddress());
+		}
+	}
+	
+	public void showOrderDetails() {
+		
+	}
+	
+	public void searchOrders() {
+		
+	}
+	
+	public void showCustomerDetails() {
+		
+	}
+	
+	public void searchCustomers() {
+		
+	}
+	
+	
+	public static int findNextValidInteger(String s) {
+		// detect 1st digit after start of string
+		int beginIndex=0;
+		int endIndex=1;
+		int length=s.length();
+		while(!s.substring(beginIndex,endIndex).matches("\\d")) {
+			beginIndex++;
+			endIndex++;
+			if(endIndex>length) {
+				endIndex = 0;
+				break;
+			}
+		}
+		
+		int i_startNumber= beginIndex;
+
+		beginIndex=i_startNumber;
+		endIndex=i_startNumber+1;
+		while(s.substring(beginIndex,endIndex).matches("\\d")) {
+			beginIndex++;
+			endIndex++;
+			if(endIndex>length) {
+				break;
+			}
+		}
+		int i_endNumber= beginIndex;
+		// return absolute value of integer
+		return Integer.valueOf(s.substring(i_startNumber, i_endNumber));
+		}
+	
+	public void printBarcode() {
+		int size = 256;
+		
+		BitMatrix bm = null;
+		
+		try {
+			bm = new com.google.zxing.qrcode.QRCodeWriter().encode(txtProductID.getText(), BarcodeFormat.QR_CODE, size, size);
+		} catch (WriterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

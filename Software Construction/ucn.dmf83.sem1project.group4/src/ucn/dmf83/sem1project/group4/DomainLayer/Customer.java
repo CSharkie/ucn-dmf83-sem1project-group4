@@ -1,7 +1,13 @@
 package ucn.dmf83.sem1project.group4.DomainLayer;
 
-public class Customer extends User {
+import java.io.Serializable;
+
+public class Customer extends User implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3027735468692614549L;
 	private int discount;
 	private customerGroup group;
 	

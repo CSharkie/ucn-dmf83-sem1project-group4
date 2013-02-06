@@ -1,5 +1,6 @@
 package ucn.dmf83.sem1project.group4.DomainLayer;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -10,7 +11,12 @@ import java.util.Date;
  * @author József Király
  *
  */
-public class User {
+public class User implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7564751585248287344L;
+
 	private int ID;
 	
 	private String name;

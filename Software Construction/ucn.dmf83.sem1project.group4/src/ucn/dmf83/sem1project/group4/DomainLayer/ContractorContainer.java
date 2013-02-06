@@ -12,7 +12,7 @@ public class ContractorContainer implements Serializable {
 	private static ContractorContainer instance = null;
 
 	protected ContractorContainer() {
-		
+		contractors = new ArrayList<Contractor>();
 	}
 
 	public static ContractorContainer getInstance() {

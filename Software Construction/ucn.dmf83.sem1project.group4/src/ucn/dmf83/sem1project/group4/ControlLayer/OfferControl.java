@@ -17,6 +17,7 @@ public class OfferControl {
 	
 	public OfferControl()
 	{
+		readFile();
 		container = OfferContainer.getInstance();
 	}
 	
@@ -28,11 +29,10 @@ public class OfferControl {
 		return instance;
 	}
 	
-	public Offer addOffer(int iD, Contractor contractor, Date startDate, Date endDate)
+	public void addOffer(int iD, Contractor contractor, Date startDate, Date endDate)
 	{
-		offer = new Offer(iD, contractor, startDate, endDate);
-		container.addOffer(offer);
-		return offer;
+		container.addOffer(new Offer(iD, contractor, startDate, endDate));
+		saveFile();
 	}
 	
 	public Offer getOffer(int iD)
@@ -43,6 +43,7 @@ public class OfferControl {
 	public void removeOffer(Offer offer)
 	{
 		container.removeOffer(offer);
+		saveFile();
 	}
 	
 	public ArrayList<Offer> getOffer(Date startDate, Date endDate)

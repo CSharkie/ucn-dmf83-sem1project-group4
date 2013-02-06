@@ -1,8 +1,14 @@
 package ucn.dmf83.sem1project.group4.DomainLayer;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Rent {
+public class Rent implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4665929723680754983L;
+
 	private int ID;
 	
 	private Customer customer;
