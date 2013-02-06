@@ -18,7 +18,6 @@ public class OfferControl {
 	public OfferControl()
 	{
 		readFile();
-		container = OfferContainer.getInstance();
 	}
 	
 	public static OfferControl getInstance()
@@ -60,7 +59,7 @@ public class OfferControl {
 		restore.close();
 		saveFile.close();
 		
-		} catch(Exception e) {}
+		} catch(Exception e) {container = OfferContainer.getInstance();}
 	}
 	
 	public void saveFile()

@@ -18,11 +18,18 @@ public class EmployeeControl {
 	 */
 	private EmployeeContainer container;
 	private Employee employee;
+	private EmployeeControl instance;
 	
-	public EmployeeControl()
+	protected EmployeeControl()
 	{
 		readFile();
-		container = EmployeeContainer.getInstance();
+	}
+	
+	public EmployeeControl getInstance() {
+		if(instance == null)
+			instance = new EmployeeControl();
+		
+		return instance;
 	}
 	
 	public void createEmployee(String name, Location location )
@@ -60,7 +67,7 @@ public class EmployeeControl {
 		restore.close();
 		saveFile.close();
 		
-		} catch(Exception e) {}
+		} catch(Exception e) {container = EmployeeContainer.getInstance();}
 	}
 	
 	public void saveFile()

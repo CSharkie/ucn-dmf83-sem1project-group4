@@ -14,7 +14,7 @@ public class SystemUserControl {
 	
 	public SystemUserControl() {
 		readFile();
-		container = SystemUserContainer.getInstance();
+		
 	}
 	
 
@@ -66,7 +66,9 @@ public class SystemUserControl {
 		restore.close();
 		saveFile.close();
 		
-		} catch(Exception e) {}
+		} catch(Exception e) {
+			container = SystemUserContainer.getInstance();
+		}
 	}
 	
 	public void saveFile()

@@ -18,8 +18,6 @@ public class LocationControl {
 	protected LocationControl()
 	{
 		readFile();
-		container = LocationContainer.getInstance();
-		
 	}
 	
 	public static LocationControl getInstance()
@@ -67,7 +65,7 @@ public class LocationControl {
 		restore.close();
 		saveFile.close();
 		
-		} catch(Exception e) {}
+		} catch(Exception e) {container = LocationContainer.getInstance();}
 	}
 	
 	public void saveFile()

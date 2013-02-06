@@ -1,15 +1,16 @@
 package ucn.dmf83.sem1project.group4.GUILayer;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
 import ucn.dmf83.sem1project.group4.ControlLayer.*;
 import ucn.dmf83.sem1project.group4.DomainLayer.*;
 
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Decorations;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Composite;
@@ -30,7 +31,6 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 
 import com.google.zxing.*;
-import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 
 public class MainApp {
@@ -188,6 +188,10 @@ public class MainApp {
 		LocationControl.getInstance().getLocation(0).addProduct(new Product(3,"Test Lumber","Test Lumber, only for testers!"));
 		LocationControl.getInstance().getLocation(0).addProduct(new Product(4,"Test Lumber","Test Lumber, only for testers!"));
 		LocationControl.getInstance().getLocation(0).addProduct(new Product(5,"Test Lumber","Test Lumber, only for testers!"));
+		
+		
+		
+		OrderControl.getInstance().createOrder(0, new Customer(), new Employee(), new Date(), false);
 		
 		
 		Display display = Display.getDefault();
@@ -807,7 +811,10 @@ public class MainApp {
 	}
 	
 	public void searchOrders() {
-		
+		listOrders.removeAll();
+		for(Order r:OrderControl.getInstance().searchOrders(searchOrder.getText())) {
+			listOrders.add(r.getID() + "    " + new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(r.getOrderDate().getTime()));
+		}
 	}
 	
 	public void showCustomerDetails() {

@@ -21,7 +21,6 @@ public class CustomerControl {
 	public CustomerControl()
 	{
 		readFile();
-		container = CustomerContainer.getInstance();
 	}
 	
 	public void createCustomer(String name, int ID, customerGroup cgroup)
@@ -70,7 +69,7 @@ public class CustomerControl {
 		restore.close();
 		saveFile.close();
 		
-		} catch(Exception e) {}
+		} catch(Exception e) {container = CustomerContainer.getInstance();}
 	}
 	
 	public void saveFile()

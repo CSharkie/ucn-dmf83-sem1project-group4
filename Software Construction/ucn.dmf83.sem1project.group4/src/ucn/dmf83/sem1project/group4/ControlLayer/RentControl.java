@@ -18,7 +18,6 @@ public class RentControl {
 	public RentControl()
 	{
 		readFile();
-		container = RentContainer.getInstance();
 	}
 	
 	public static RentControl getInstance()
@@ -63,7 +62,7 @@ public class RentControl {
 		restore.close();
 		saveFile.close();
 		
-		} catch(Exception e) {}
+		} catch(Exception e) {container = RentContainer.getInstance();}
 	}
 	
 	public void saveFile()

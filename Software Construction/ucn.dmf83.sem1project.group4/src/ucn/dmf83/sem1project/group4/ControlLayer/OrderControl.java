@@ -19,7 +19,6 @@ public class OrderControl {
 	public OrderControl()
 	{
 		readFile();
-		container = OrderContainer.getInstance();
 	}
 	
 	public static OrderControl getInstance() {
@@ -79,7 +78,7 @@ public class OrderControl {
 		restore.close();
 		saveFile.close();
 		
-		} catch(Exception e) {}
+		} catch(Exception e) {container = OrderContainer.getInstance();}
 	}
 	
 	public void saveFile()

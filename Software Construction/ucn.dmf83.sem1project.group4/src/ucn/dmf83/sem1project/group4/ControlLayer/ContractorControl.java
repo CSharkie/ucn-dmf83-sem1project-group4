@@ -17,7 +17,6 @@ public class ContractorControl {
 	protected ContractorControl()
 	{
 		readFile();
-		contractor = ContractorContainer.getInstance();
 	}
 	
 	public ContractorControl getInstance() {
@@ -53,7 +52,7 @@ public class ContractorControl {
 		restore.close();
 		saveFile.close();
 		
-		} catch(Exception e) {}
+		} catch(Exception e) {contractor = ContractorContainer.getInstance();}
 	}
 	
 	public void saveFile()
